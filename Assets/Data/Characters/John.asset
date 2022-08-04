@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charImage: {fileID: 21300000, guid: bf57c0fc240a7584fa463c41d5ce17a4, type: 3}
   name: John
-  charID: 1
+  charID: 0
   moveSpeed: 100
   maxHealth: 100
   charAnimator: {fileID: 1170187393313926714, guid: b76bab7ab24151f429d509533be040d9, type: 3}
