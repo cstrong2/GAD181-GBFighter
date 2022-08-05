@@ -8,8 +8,12 @@ namespace Core
     public class PlayersManager : MonoBehaviour
     {
         public static PlayersManager Instance = null;
+        
         [SerializeField]
-        private List<PlayerController> players;
+        private List<PlayerBrain> players;
+
+        [SerializeField] private int maxPlayers = 4;
+        public int MaxPlayers => maxPlayers;
 
         private void Awake()
         {
@@ -22,8 +26,23 @@ namespace Core
                 Destroy(this.gameObject);
             }
             
-            players = FindObjectsOfType<PlayerController>().ToList();
-            GameEvents.OnUISetUpEvent?.Invoke(players);
+//            players = FindObjectsOfType<PlayerBrain>().ToList();
+//            GameEvents.OnUISetUpEvent?.Invoke(players);
+        }
+
+        private void OnEnable()
+        {
+            GameEvents.OnAddNewPlayerEvent += AddPlayer;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnAddNewPlayerEvent -= AddPlayer;
+        }
+
+        void AddPlayer()
+        {
+            Instantiate(new GameObject().AddComponent<Player.PlayerBrain>(), transform);
         }
     }
 }

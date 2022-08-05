@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerBrain : MonoBehaviour
 {
     [SerializeField]
     private float playerSpeed = 2.0f;
