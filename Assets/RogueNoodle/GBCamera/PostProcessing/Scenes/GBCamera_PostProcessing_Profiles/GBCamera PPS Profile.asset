@@ -24,7 +24,7 @@ MonoBehaviour:
     overrideState: 0
     value: 160
   _ResY:
-    overrideState: 0
+    overrideState: 1
     value: 144
   _Fade:
     overrideState: 1
