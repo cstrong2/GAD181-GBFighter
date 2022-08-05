@@ -1,7 +1,7 @@
 ﻿using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
 namespace UI
 {
     public class CharacterSelectUI : MonoBehaviour
@@ -13,6 +13,10 @@ namespace UI
         {
             grid = GetComponentInChildren<GridLayoutGroup>();
             GenerateCharacterGrid();
+            
+//            var eventSystem = EventSystem.current;
+//            eventSystem.SetSelectedGameObject( this.gameObject, new BaseEventData(eventSystem));
+
         }
 
         void GenerateCharacterGrid()
@@ -27,7 +31,8 @@ namespace UI
                 // Get the UI script because we need to add an ID to it.
                 var cUI = charGridElement.GetComponent<CharacterUI>() ? charGridElement.GetComponent<CharacterUI>() : charGridElement.AddComponent<CharacterUI>();
                 // Add the sprite to the grid
-                charGridElement.GetComponent<Image>().sprite = character.CharImage;
+                cUI.charID = character.CharID;
+                cUI.charImage.sprite = character.CharImage;
             }
         }
     }
