@@ -1,6 +1,6 @@
-﻿using ScriptableObjects;
+﻿using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace UI
 {
@@ -9,19 +9,17 @@ namespace UI
         [SerializeField] private CharacterDatabase characterDatabase;
         [SerializeField] private GameObject characterUI;
         [SerializeField] private GridLayoutGroup grid;
+        [SerializeField] List<CharacterUI> characterUIList = null;
         private void Awake()
         {
             grid = GetComponentInChildren<GridLayoutGroup>();
             GenerateCharacterGrid();
-            
-//            var eventSystem = EventSystem.current;
-//            eventSystem.SetSelectedGameObject( this.gameObject, new BaseEventData(eventSystem));
-
         }
 
         void GenerateCharacterGrid()
         {
             int count = 0;
+            characterUIList = new();
             foreach (var character in characterDatabase.charactersList)
             {
                 GameObject charGridElement = Instantiate(characterUI, grid.transform);
@@ -30,6 +28,7 @@ namespace UI
                 charGridElement.name = "Character " + count++;
                 // Get the UI script because we need to add an ID to it.
                 var cUI = charGridElement.GetComponent<CharacterUI>() ? charGridElement.GetComponent<CharacterUI>() : charGridElement.AddComponent<CharacterUI>();
+                characterUIList.Add(cUI);
                 // Add the sprite to the grid
                 cUI.charID = character.CharID;
                 cUI.charImage.sprite = character.CharImage;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Events;
 using UnityEngine;
@@ -9,8 +8,8 @@ namespace Core
     public class PlayersManager : MonoBehaviour
     {
         public static PlayersManager Instance = null;
-//        [SerializeField]
-//        private List<Damageable> players;
+        [SerializeField]
+        private List<PlayerController> players;
 
         private void Awake()
         {
@@ -23,9 +22,8 @@ namespace Core
                 Destroy(this.gameObject);
             }
             
-//            players = FindObjectsOfType<Damageable>().ToList();
-//
-//            GameEvents.OnUISetUpEvent?.Invoke(players);
+            players = FindObjectsOfType<PlayerController>().ToList();
+            GameEvents.OnUISetUpEvent?.Invoke(players);
         }
     }
 }

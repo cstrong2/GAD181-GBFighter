@@ -32,7 +32,7 @@ namespace UI
 
         void CharacterSelected()
         {
-            selectionButton.onClick.AddListener(() => GameEvents.OnPlayerSelectCharacter?.Invoke(charID, 0));
+            selectionButton.onClick.AddListener(() => GameEvents.OnPlayerSelectCharacter?.Invoke(charID, 0)); // how do we get this player id?
         }
     }
 }
