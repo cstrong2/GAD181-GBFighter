@@ -9,5 +9,6 @@ namespace ScriptableObjects
         [SerializeField] private int maxPlayers;
         [SerializeField] private int roundTimeInSeconds;
         public int MaxPlayers => maxPlayers;
+        
     }
 }

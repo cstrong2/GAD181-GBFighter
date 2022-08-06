@@ -1,8 +1,5 @@
-﻿using System;
-using Events;
-using ScriptableObjects;
+﻿using Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI

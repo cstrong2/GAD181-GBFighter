@@ -1,4 +1,6 @@
-﻿using ScriptableObjects;
+﻿using System;
+using Events;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Core
@@ -21,6 +23,12 @@ namespace Core
             {
                 Destroy(this.gameObject);
             }
+            
+        }
+
+        private void Start()
+        {
+            GameEvents.OnLoadGameDataEvent?.Invoke(gameData.MaxPlayers);
         }
     }
 }
