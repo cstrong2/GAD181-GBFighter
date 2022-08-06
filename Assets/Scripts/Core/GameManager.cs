@@ -1,5 +1,4 @@
-﻿using System;
-using Events;
+﻿using Events;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -23,7 +22,6 @@ namespace Core
             {
                 Destroy(this.gameObject);
             }
-            
         }
 
         private void Start()

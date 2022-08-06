@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.InputSystem.Users;
+using UnityEngine.Serialization;
 
 
 namespace UI
@@ -20,9 +21,10 @@ namespace UI
         private Mouse _vMouse;
         private Mouse _currentMouse;
         private Camera _mainCamera;
-        [SerializeField] private string _previousControlScheme = "";
+       
+        [SerializeField] private string previousControlScheme = "";
         private const string GamepadScheme = "Gamepad";
-        private const string KeyboardAndMouseScheme = "Keyboard&Mouse";
+        private const string KeyboardAndMouseScheme = "KeyboardMouse";
         private void OnEnable()
         {
             // Todo: things be broken with the previousControlScheme string
@@ -39,7 +41,12 @@ namespace UI
                 cursor.name = "Cursor";
                 cursorTransform = cursor.GetComponent<RectTransform>();
             #endregion
-
+            
+            #region PlayerInputConfig
+                playerInput.uiInputModule = GetComponent<InputSystemUIInputModule>();
+                playerInput.camera = _mainCamera;
+            #endregion
+            
             if (_vMouse == null) _vMouse = (Mouse)InputSystem.AddDevice("VirtualMouse");
             else if (!_vMouse.added)
                 InputSystem.AddDevice(_vMouse);
@@ -52,10 +59,7 @@ namespace UI
                 InputState.Change(_vMouse.position, position);
             }
 
-            #region PlayerInputConfig
-                playerInput.uiInputModule = FindObjectOfType<InputSystemUIInputModule>();
-                playerInput.camera = _mainCamera;
-            #endregion
+            
             
             InputSystem.onAfterUpdate += UpdateMotion;
             playerInput.onControlsChanged += OnControlsChanged;
@@ -107,21 +111,21 @@ namespace UI
         
         private void OnControlsChanged(PlayerInput input)
         {
-            if (playerInput.currentControlScheme == KeyboardAndMouseScheme && _previousControlScheme != KeyboardAndMouseScheme)
+            if (playerInput.currentControlScheme == KeyboardAndMouseScheme && previousControlScheme != KeyboardAndMouseScheme)
             {
                 // This hides the gamepad cursor
                 cursor.SetActive(false);
                 // This will set the MOUSE visible
                 Cursor.visible = true;
                 _currentMouse.WarpCursorPosition(_vMouse.position.ReadValue());
-                _previousControlScheme = KeyboardAndMouseScheme;
-            } else if (playerInput.currentControlScheme == GamepadScheme && _previousControlScheme != GamepadScheme)
+                previousControlScheme = KeyboardAndMouseScheme;
+            } else if (playerInput.currentControlScheme == GamepadScheme && previousControlScheme != GamepadScheme)
             {
                 cursor.gameObject.SetActive(true);
                 Cursor.visible = false;
                 InputState.Change(_vMouse.position,_currentMouse.position.ReadValue());
                 AnchorCursor(_currentMouse.position.ReadValue());
-                _previousControlScheme = GamepadScheme;
+                previousControlScheme = GamepadScheme;
             }
         }
     }

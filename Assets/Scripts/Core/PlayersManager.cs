@@ -12,12 +12,10 @@ namespace Core
         public static PlayersManager Instance = null;
 
         private PlayerInputManager inputManager;
-        
         [SerializeField]
         private List<PlayerInstance> players;
 
         private int _maxPlayers;
-
         private bool startUpRan = false;
         private void Awake()
         {
@@ -37,33 +35,33 @@ namespace Core
         private void OnEnable()
         {
             GameEvents.OnLoadGameDataEvent += SetGameData;
-            GameEvents.OnAddNewPlayerEvent += AddPlayer;
+            inputManager.onPlayerJoined += AddPlayer;
+
         }
 
         private void OnDisable()
         {
             GameEvents.OnLoadGameDataEvent -= SetGameData;
-            GameEvents.OnAddNewPlayerEvent -= AddPlayer;
+            inputManager.onPlayerJoined -= AddPlayer;
         }
 
-        void AddPlayer()
-        {
-//            if (players.Count == _maxPlayers)
-//                return;
+        private void AddPlayer(PlayerInput player)
+        { 
+            if (players.Count == _maxPlayers)
+                return;
 //            // We need a message to show if max players is reached or something?
 //            
-
+            
+            player.transform.parent = this.transform;
             // This sets up the player data for a new player
-            GameObject newPlayer = Instantiate(new GameObject(), transform);
-            var newPlayerBrain = newPlayer.AddComponent<PlayerInstance>();
-            newPlayerBrain.playerInstanceData = ScriptableObject.CreateInstance<PlayerData>();
-            players.Add(newPlayerBrain);
-            newPlayerBrain.playerInstanceData.PlayerID = players.FindIndex(m => m == newPlayerBrain);
-            newPlayerBrain.playerInstanceData.name = newPlayerBrain.playerInstanceData.PlayerLabel;
-            newPlayerBrain.name = newPlayerBrain.playerInstanceData.PlayerLabel;
-            
+            var playerInstance = player.GetComponent<PlayerInstance>();
+            playerInstance.playerInput = player;
+            playerInstance.playerInstanceData = ScriptableObject.CreateInstance<PlayerData>();
+            playerInstance.playerInstanceData.PlayerID = player.playerIndex;
+            playerInstance.name = playerInstance.playerInstanceData.PlayerLabel;
+            playerInstance.playerInstanceData.name = playerInstance.playerInstanceData.PlayerLabel;
+            players.Add(playerInstance);
             Debug.Log(players.Count +" players count");
-            
         }
 
         void SetGameData(int maxPlayers)
@@ -71,7 +69,6 @@ namespace Core
             if(startUpRan == false)
             {
                 // We need to add one player because there will always be at least one.
-                AddPlayer();
                 players.Capacity = maxPlayers;
                 _maxPlayers = maxPlayers;
                 startUpRan = true;
