@@ -8,13 +8,16 @@ namespace Events
     {
 
         public delegate void SetUpPlayerUI(List<PlayerInstance> players);
-
         public delegate void SendMaxPlayers(int maxPlayers);
         public delegate void CharacterSelected(int charId, int playerId);
+
+        public delegate void NewPlayerJoined(int playerId);
         
         public static SetUpPlayerUI OnUISetUpEvent;
+        public static NewPlayerJoined OnNewPlayerJoinedEvent;
         public static CharacterSelected OnPlayerSelectCharacter;
         public static SendMaxPlayers OnLoadGameDataEvent;
+        
 
     }
 }

@@ -62,6 +62,8 @@ namespace Core
             playerInstance.playerInstanceData.name = playerInstance.playerInstanceData.PlayerLabel;
             players.Add(playerInstance);
             Debug.Log(players.Count +" players count");
+            
+            GameEvents.OnNewPlayerJoinedEvent?.Invoke(player.playerIndex);
         }
 
         void SetGameData(int maxPlayers)

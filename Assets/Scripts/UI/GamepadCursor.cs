@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.InputSystem.Users;
-using UnityEngine.Serialization;
 
 
 namespace UI
@@ -21,7 +20,7 @@ namespace UI
         private Mouse _vMouse;
         private Mouse _currentMouse;
         private Camera _mainCamera;
-       
+        
         [SerializeField] private string previousControlScheme = "";
         private const string GamepadScheme = "Gamepad";
         private const string KeyboardAndMouseScheme = "KeyboardMouse";
@@ -57,9 +56,8 @@ namespace UI
             {
                 Vector2 position = cursorTransform.anchoredPosition;
                 InputState.Change(_vMouse.position, position);
+                Debug.Log("Cursor transform did not equal null");
             }
-
-            
             
             InputSystem.onAfterUpdate += UpdateMotion;
             playerInput.onControlsChanged += OnControlsChanged;
@@ -113,6 +111,7 @@ namespace UI
         {
             if (playerInput.currentControlScheme == KeyboardAndMouseScheme && previousControlScheme != KeyboardAndMouseScheme)
             {
+                Debug.Log("Controls changed to KBM");
                 // This hides the gamepad cursor
                 cursor.SetActive(false);
                 // This will set the MOUSE visible
@@ -121,6 +120,7 @@ namespace UI
                 previousControlScheme = KeyboardAndMouseScheme;
             } else if (playerInput.currentControlScheme == GamepadScheme && previousControlScheme != GamepadScheme)
             {
+                Debug.Log("Controls changed to GamePad");
                 cursor.gameObject.SetActive(true);
                 Cursor.visible = false;
                 InputState.Change(_vMouse.position,_currentMouse.position.ReadValue());

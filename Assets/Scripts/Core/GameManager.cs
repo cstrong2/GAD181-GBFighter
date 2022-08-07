@@ -11,6 +11,8 @@ namespace Core
 
         [SerializeField]
         private GameData gameData;
+
+//        [SerializeField] private CharacterDatabase characterDB;
         
         private void Awake()
         {
@@ -27,6 +29,11 @@ namespace Core
         private void Start()
         {
             GameEvents.OnLoadGameDataEvent?.Invoke(gameData.MaxPlayers);
+        }
+
+        public CharacterData GetCharByID(int id)
+        {
+            return gameData.characterDB.charactersList.Find(m => m.CharID == id);
         }
     }
 }

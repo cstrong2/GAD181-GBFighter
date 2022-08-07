@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPlayers: 4
   roundTimeInSeconds: 60
+  characterDB: {fileID: 11400000, guid: 360c9a753bedf224c8bedc90e5476f73, type: 2}

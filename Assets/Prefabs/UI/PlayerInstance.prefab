@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInstanceData: {fileID: 0}
-  playerInput: {fileID: 0}
+  playerInput: {fileID: -8720767180056125600}
 --- !u!114 &3685880076171266398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf245eda1193446c8b5869f68b50682b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 4187477032908103349, guid: b1f4b3f7e203c124c9a1b432b12d1931, type: 3}
+  playerInput: {fileID: -8720767180056125600}
   cursor: {fileID: 8492995533083243416, guid: c2d37533384ea6447af4a5f2a6b23330, type: 3}
   cursorTransform: {fileID: 8492995533083243419, guid: c2d37533384ea6447af4a5f2a6b23330, type: 3}
   canvas: {fileID: 0}
@@ -93,8 +93,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
