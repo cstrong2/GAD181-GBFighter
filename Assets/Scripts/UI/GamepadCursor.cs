@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.InputSystem.Users;
 
 
@@ -9,6 +10,7 @@ namespace UI
     public class GamepadCursor : MonoBehaviour
     {
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private GameObject cursor;
         [SerializeField] private RectTransform cursorTransform;
         [SerializeField] private Canvas canvas;
         [SerializeField] private RectTransform canvasTransform;
@@ -18,14 +20,31 @@ namespace UI
         private Mouse _vMouse;
         private Mouse _currentMouse;
         private Camera _mainCamera;
-
-        private string _previousControlScheme = "";
+        
+        [SerializeField] private string previousControlScheme = "";
         private const string GamepadScheme = "Gamepad";
-        private const string KeyboardAndMouseScheme = "Keyboard&Mouse";
+        private const string KeyboardAndMouseScheme = "KeyboardMouse";
         private void OnEnable()
         {
+            // Todo: things be broken with the previousControlScheme string
             _mainCamera = Camera.main;
             _currentMouse = Mouse.current;
+
+            #region Canvas
+                canvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
+                canvasTransform = canvas.GetComponent<RectTransform>();
+            #endregion
+            
+            #region CursorSetup
+                cursor = Instantiate(cursor, canvas.transform);
+                cursor.name = "Cursor";
+                cursorTransform = cursor.GetComponent<RectTransform>();
+            #endregion
+            
+            #region PlayerInputConfig
+                playerInput.uiInputModule = GetComponent<InputSystemUIInputModule>();
+                playerInput.camera = _mainCamera;
+            #endregion
             
             if (_vMouse == null) _vMouse = (Mouse)InputSystem.AddDevice("VirtualMouse");
             else if (!_vMouse.added)
@@ -37,8 +56,9 @@ namespace UI
             {
                 Vector2 position = cursorTransform.anchoredPosition;
                 InputState.Change(_vMouse.position, position);
+                Debug.Log("Cursor transform did not equal null");
             }
-
+            
             InputSystem.onAfterUpdate += UpdateMotion;
             playerInput.onControlsChanged += OnControlsChanged;
         }
@@ -89,21 +109,23 @@ namespace UI
         
         private void OnControlsChanged(PlayerInput input)
         {
-            if (playerInput.currentControlScheme == KeyboardAndMouseScheme && _previousControlScheme != KeyboardAndMouseScheme)
+            if (playerInput.currentControlScheme == KeyboardAndMouseScheme && previousControlScheme != KeyboardAndMouseScheme)
             {
+                Debug.Log("Controls changed to KBM");
                 // This hides the gamepad cursor
-                cursorTransform.gameObject.SetActive(false);
+                cursor.SetActive(false);
                 // This will set the MOUSE visible
                 Cursor.visible = true;
                 _currentMouse.WarpCursorPosition(_vMouse.position.ReadValue());
-                _previousControlScheme = KeyboardAndMouseScheme;
-            } else if (playerInput.currentControlScheme == GamepadScheme && _previousControlScheme != GamepadScheme)
+                previousControlScheme = KeyboardAndMouseScheme;
+            } else if (playerInput.currentControlScheme == GamepadScheme && previousControlScheme != GamepadScheme)
             {
-                cursorTransform.gameObject.SetActive(true);
+                Debug.Log("Controls changed to GamePad");
+                cursor.gameObject.SetActive(true);
                 Cursor.visible = false;
                 InputState.Change(_vMouse.position,_currentMouse.position.ReadValue());
                 AnchorCursor(_currentMouse.position.ReadValue());
-                _previousControlScheme = GamepadScheme;
+                previousControlScheme = GamepadScheme;
             }
         }
     }

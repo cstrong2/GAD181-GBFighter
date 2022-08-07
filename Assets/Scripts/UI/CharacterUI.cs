@@ -1,8 +1,6 @@
 ﻿using System;
 using Events;
-using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -25,14 +23,14 @@ namespace UI
             
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            CharacterSelected();
+            selectionButton.onClick.AddListener(CharacterSelected);
         }
 
         void CharacterSelected()
         {
-            selectionButton.onClick.AddListener(() => GameEvents.OnPlayerSelectCharacter?.Invoke(charID, 0)); // how do we get this player id?
+            GameEvents.OnPlayerSelectCharacter?.Invoke(charID, 0); // how do we get this player id?
         }
     }
 }

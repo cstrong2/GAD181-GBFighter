@@ -46,11 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 4187477032908103349}
-  cursorTransform: {fileID: 0}
+  cursor: {fileID: 8492995533083243416, guid: c2d37533384ea6447af4a5f2a6b23330, type: 3}
+  cursorTransform: {fileID: 8492995533083243419, guid: c2d37533384ea6447af4a5f2a6b23330, type: 3}
   canvas: {fileID: 0}
   canvasTransform: {fileID: 0}
   cursorSpeed: 1000
   screenPadding: 32
+  previousControlScheme: 
 --- !u!114 &4187477032908103349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +80,6 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
