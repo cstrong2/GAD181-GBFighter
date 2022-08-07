@@ -21,7 +21,7 @@ namespace UI
         [Header("Character Selection Settings")]
         public TMP_Text characterLabel;
         public Image image;
-        
+        public bool playerReady = false;
         public Toggle State
         {
             get => state;
@@ -39,6 +39,11 @@ namespace UI
                 assignedPlayerID = value;
                 playerIDText.text = "P" + (value+1);
             } 
+        }
+
+        private void Awake()
+        {
+            playerReady = false;
         }
 
         private void Update()

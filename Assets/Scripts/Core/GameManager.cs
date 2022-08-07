@@ -1,6 +1,8 @@
-﻿using Events;
+﻿using System;
+using Events;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -11,8 +13,9 @@ namespace Core
 
         [SerializeField]
         private GameData gameData;
-
-//        [SerializeField] private CharacterDatabase characterDB;
+        
+        [SerializeField]
+        private string fightScene;
         
         private void Awake()
         {
@@ -26,6 +29,16 @@ namespace Core
             }
         }
 
+        private void OnEnable()
+        {
+            GameEvents.OnAllPlayersReadyEvent += LoadFightScene;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnAllPlayersReadyEvent -= LoadFightScene;
+        }
+
         private void Start()
         {
             GameEvents.OnLoadGameDataEvent?.Invoke(gameData.MaxPlayers);
@@ -34,6 +47,11 @@ namespace Core
         public CharacterData GetCharByID(int id)
         {
             return gameData.characterDB.charactersList.Find(m => m.CharID == id);
+        }
+
+        void LoadFightScene()
+        {
+            SceneManager.LoadScene(fightScene);
         }
     }
 }
