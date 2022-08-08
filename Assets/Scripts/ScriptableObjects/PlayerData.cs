@@ -12,7 +12,7 @@ namespace ScriptableObjects
         private string playerLabel, playerLabelShort; // This will be set by the playerManager
         [SerializeField] 
         private int currentCharacterID; // This will be set by the player from the character select menu
-        
+
         public int PlayerID
         {
             get => playerID;
@@ -22,6 +22,9 @@ namespace ScriptableObjects
                 SetPlayerLabel();
             }
         }
+        
+        public int CurrentCharacterID => currentCharacterID;
+
 
         public string PlayerLabel
         {

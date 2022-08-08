@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7455728213420601522, guid: e63b9c4d34f49fc4999d53e341f9a6d9, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7455728213420601534, guid: e63b9c4d34f49fc4999d53e341f9a6d9, type: 3}
       propertyPath: m_Name
-      value: PlayerCharacter
+      value: Character_John
       objectReference: {fileID: 0}
     - target: {fileID: 7796788557598337540, guid: e63b9c4d34f49fc4999d53e341f9a6d9, type: 3}
       propertyPath: m_RootOrder
