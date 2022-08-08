@@ -17,10 +17,10 @@ MonoBehaviour:
   charID: 2
   moveSpeed: 100
   maxHealth: 100
-  charAnimator: {fileID: 1170187393313926714, guid: b76bab7ab24151f429d509533be040d9, type: 3}
-  charAvatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  charArmatureMesh: {fileID: 4698152120088058464, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  charPrefab: {fileID: 5590844295517073146, guid: b76bab7ab24151f429d509533be040d9, type: 3}
+  charAnimator: {fileID: 5866666021909216657, guid: 00a87d12c5abac54788e56277095539e, type: 3}
+  charAvatar: {fileID: 9000000, guid: 00a87d12c5abac54788e56277095539e, type: 3}
+  charArmatureMesh: {fileID: 4698152120088058464, guid: 00a87d12c5abac54788e56277095539e, type: 3}
+  charPrefab: {fileID: 919132149155446097, guid: 00a87d12c5abac54788e56277095539e, type: 3}
   actionList:
   - name: SuperPunch
     damage: 10

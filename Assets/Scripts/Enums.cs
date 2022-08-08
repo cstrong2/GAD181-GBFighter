@@ -4,3 +4,9 @@
         Inactive,
         Active
     }
+
+    public enum Generation
+    {
+        Static,
+        Random
+    }

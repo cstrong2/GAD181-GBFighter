@@ -22,10 +22,10 @@ MonoBehaviour:
     defaultState: 1
   _ResX:
     overrideState: 1
-    value: 1280
+    value: 640
   _ResY:
     overrideState: 1
-    value: 720
+    value: 360
   _Fade:
     overrideState: 1
     value: 1

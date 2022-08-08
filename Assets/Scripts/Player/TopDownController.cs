@@ -1,4 +1,5 @@
-﻿using StarterAssets;
+﻿using Player;
+using StarterAssets;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -76,28 +77,28 @@ using UnityEngine.InputSystem;
         private int _animIDMotionSpeed;
 
 #if ENABLE_INPUT_SYSTEM 
-        private PlayerInput _playerInput;
+        public PlayerInput _playerInput;
 #endif
         private Animator _animator;
         private CharacterController _controller;
-        private StarterAssetsInputs _input;
+        private PlayerControlInputs _input;
         private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
-        private bool IsCurrentDeviceMouse
-        {
-            get
-            {
-#if ENABLE_INPUT_SYSTEM 
-                return _playerInput.currentControlScheme == "KeyboardMouse";
-#else
-				return false;
-#endif
-            }
-        }
+//
+//        private bool IsCurrentDeviceMouse
+//        {
+//            get
+//            {
+//#if ENABLE_INPUT_SYSTEM 
+//                return _playerInput.currentControlScheme == "KeyboardMouse";
+//#else
+//				return false;
+//#endif
+//            }
+//        }
 
 
         private void Awake()
@@ -111,13 +112,15 @@ using UnityEngine.InputSystem;
 
         private void Start()
         {
-//            _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
-            _playerInput = GetComponent<PlayerInput>();
+            _input = GetComponent<PlayerControlInputs>();
+#if ENABLE_INPUT_SYSTEM
+            if (_playerInput == null)
+                _playerInput = this.GetComponent<CharacterSetup>().playerInput;
+            else 
+                _playerInput = GetComponent<PlayerInput>();
 #endif
 
             AssignAnimationIDs();
