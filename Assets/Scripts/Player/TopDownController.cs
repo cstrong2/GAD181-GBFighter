@@ -73,6 +73,7 @@ using UnityEngine.InputSystem;
         private int _animIDSpeed;
         private int _animIDGrounded;
         private int _animIDJump;
+        private int _animIDPunch;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
@@ -133,17 +134,27 @@ using UnityEngine.InputSystem;
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-
+            Punch();
             JumpAndGravity();
             GroundedCheck();
             Move();
         }
-        
+
+        private void Punch()
+        {
+            if (_input.punch)
+            {
+                _animator.SetTrigger(_animIDPunch);
+                _input.punch = false;
+            }
+        }
+
         private void AssignAnimationIDs()
         {
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
             _animIDJump = Animator.StringToHash("Jump");
+            _animIDPunch = Animator.StringToHash("isPunching");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }

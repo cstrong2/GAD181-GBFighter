@@ -9,6 +9,8 @@ namespace Core
 {
     public class PlayersManagerInterim : MonoBehaviour
     {
+        // TODO: This code will be deleted and the PlayersManager will take over
+        
         public static PlayersManagerInterim PMInstance = null;
 
         [SerializeField] private PlayerInputManager inputManager;

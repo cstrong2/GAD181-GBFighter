@@ -62,7 +62,10 @@ public class CharacterSetup : MonoBehaviour
 
         
         armature = CData.CharPrefab;
-        //TODO: REMOVE THIS This is temp code for interim release      
+        //TODO: REMOVE THIS This is temp code for interim release   
+
+        #region InterimCodeForWeek1ToDelete
+
         Debug.Log(PlayersManagerInterim.PMInstance.SpawnLocations[PlayerID]);
         if (PlayersManagerInterim.PMInstance)
         {
@@ -78,7 +81,8 @@ public class CharacterSetup : MonoBehaviour
             Instantiate(armature, transform);
         }
 
-
+        #endregion 
+        
         // Apply the animator and configure it
         animator = GetComponent<Animator>();
         animator.avatar = CData.CharAvatar;

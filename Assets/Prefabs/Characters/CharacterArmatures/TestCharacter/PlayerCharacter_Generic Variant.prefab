@@ -14,7 +14,7 @@ PrefabInstance:
     - target: {fileID: 7455728213420601522, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: m_Actions
       value: 
-      objectReference: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+      objectReference: {fileID: -944628639613478452, guid: d61779c4b01f1c64880382269b3a9c52, type: 3}
     - target: {fileID: 7455728213420601522, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: m_DefaultControlScheme
       value: 

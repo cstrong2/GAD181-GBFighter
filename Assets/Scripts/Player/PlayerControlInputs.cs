@@ -10,7 +10,8 @@ namespace Player
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
-
+		public bool punch;
+		
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -41,6 +42,11 @@ namespace Player
 			SprintInput(value.isPressed);
 		}
 
+		public void OnPunch(InputValue value)
+		{
+			PunchInput(value.isPressed);
+		}
+
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
@@ -60,6 +66,11 @@ namespace Player
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+		
+		public void PunchInput(bool newPunchState)
+		{
+			punch = newPunchState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
