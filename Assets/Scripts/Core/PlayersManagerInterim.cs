@@ -48,12 +48,16 @@ namespace Core
         private void AddPlayer(PlayerInput player)
         {
             Debug.Log("AddPlayerRan");
-            players.Add(player);
+            if (players.Find(p => p == player))
+            {
+                return;
+            } else {
+                players.Add(player);
+            }
             // Set a random character from the db to the player
             var cSetup = player.GetComponent<CharacterSetup>();
-            cSetup.CData = GameManager.Instance.GetCharByID(Random.Range(0, characterDB.charactersList.Count));
+            cSetup.CData = GameManager.Instance.GetCharByID(Random.Range(0, characterDB.charactersList.Count - 1));
             cSetup.PlayerID = player.playerIndex;
-
         }
     }
 }

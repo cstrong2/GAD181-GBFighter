@@ -15,7 +15,9 @@ public class CharacterSetup : MonoBehaviour
     [SerializeField] private CharacterData cData;
     [SerializeField][ReadOnly] private GameObject armature;
     [SerializeField][ReadOnly] private Animator animator;
+    [SerializeField] private Avatar avatar;
     private Transform spawnLocation;
+    
     [Header("Player Information")] 
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
@@ -23,8 +25,12 @@ public class CharacterSetup : MonoBehaviour
 
     public CharacterData CData
     {
-        get => cData; 
-        set => cData = value;
+        get => cData;
+        set
+        {
+            cData = value;
+            AssignCharData(CData);
+        }
     }
 
     public PlayerData PData
@@ -40,55 +46,53 @@ public class CharacterSetup : MonoBehaviour
     }
 
     private void Awake()
-    {
+    {               
+        this.gameObject.SetActive(false);
+
         
-        if (PlayersManager.Instance && GameManager.Instance)
-        {
-            var playerInstance = PlayersManager.Instance.Players[0];
-            PData = playerInstance.playerInstanceData;
-            playerID = PData.PlayerID;
-            CData = GameManager.Instance.GetCharByID(PData.CurrentCharacterID);
-            charInstanceName = CData.Name + "-P" + playerID;
-            playerInput = playerInstance.GetComponent<PlayerInput>();
-            
-        }
-        else
-        {
-            Debug.Log("No player manager or game manager was found");
-            if (playerInput == null)
-                playerInput = GetComponent<PlayerInput>();
-        }
+//        if (PlayersManager.Instance && GameManager.Instance)
+//        {
+//            var playerInstance = PlayersManager.Instance.Players[0];
+//            PData = playerInstance.playerInstanceData;
+//            playerID = PData.PlayerID;
+//            CData = GameManager.Instance.GetCharByID(PData.CurrentCharacterID);
+//            charInstanceName = CData.Name + "-P" + playerID;
+//            playerInput = playerInstance.GetComponent<PlayerInput>();
+//            
+//        }
+//        else
+//        {
+//            Debug.Log("No player manager or game manager was found");
+//            if (playerInput == null)
+//                playerInput = GetComponent<PlayerInput>();
+//        }
        
 
         
-        armature = CData.CharPrefab;
         //TODO: REMOVE THIS This is temp code for interim release   
 
         #region InterimCodeForWeek1ToDelete
 
-        Debug.Log(PlayersManagerInterim.PMInstance.SpawnLocations[PlayerID]);
         if (PlayersManagerInterim.PMInstance)
         {
             spawnLocation = PlayersManagerInterim.PMInstance.SpawnLocations[PlayerID];
-            Instantiate(armature, transform);
-            this.gameObject.SetActive(false);
-            this.GetComponent<Transform>().position = spawnLocation.position;
-            this.gameObject.SetActive(true);
+            if(CData)
+            {
+                Instantiate(armature, transform);
+                this.GetComponent<Transform>().position = spawnLocation.position;
+                this.gameObject.SetActive(true);
+            }
 
         }
         else
         {
-            Instantiate(armature, transform);
+            if (CData)
+            {
+                Instantiate(armature, transform);
+            }
         }
 
-        #endregion 
-        
-        // Apply the animator and configure it
-        animator = GetComponent<Animator>();
-        animator.avatar = CData.CharAvatar;
-        
-        maxHealth = CData.MaxHealth;
-        currentHealth = maxHealth;
+        #endregion
 
     }
 
@@ -99,8 +103,22 @@ public class CharacterSetup : MonoBehaviour
             playersParent = new GameObject();
             playersParent.name = "PlayersParent";
         }
+
         this.transform.parent = playersParent.transform;
 
        
+    }
+
+    public void AssignCharData(CharacterData characterData)
+    {
+    
+            animator = GetComponent<Animator>();
+            avatar = animator.avatar;
+            avatar = CData.CharAvatar;
+            animator = CData.CharAnimator;
+            armature = CData.CharPrefab;
+            maxHealth = CData.MaxHealth;
+            currentHealth = maxHealth;
+        
     }
 }
