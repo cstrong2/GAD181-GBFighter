@@ -1,5 +1,4 @@
-﻿using System;
-using Events;
+﻿using Events;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;

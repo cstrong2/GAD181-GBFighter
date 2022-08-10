@@ -123,36 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &869513259 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7042569712304423640, guid: 8f6d4fb4a2a809c4cbaab9d1a41d3e25, type: 3}
-  m_PrefabInstance: {fileID: 1587448292}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &869513264 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7042569712303738908, guid: 8f6d4fb4a2a809c4cbaab9d1a41d3e25, type: 3}
   m_PrefabInstance: {fileID: 1587448292}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &869513266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869513259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AssetsPPU: 32
-  m_RefResolutionX: 1920
-  m_RefResolutionY: 1080
-  m_UpscaleRT: 1
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
 --- !u!1 &1139673048
 GameObject:
   m_ObjectHideFlags: 0
