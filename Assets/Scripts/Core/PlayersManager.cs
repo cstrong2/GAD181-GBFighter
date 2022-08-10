@@ -101,7 +101,8 @@ namespace Core
         {
             foreach (var p in players)
             {
-                p.GetComponent<GamepadCursor>().enabled = true;
+                if(p.GetComponent<GamepadCursor>())
+                    p.GetComponent<GamepadCursor>().enabled = true;
             }
         }
         
@@ -109,7 +110,8 @@ namespace Core
         {
             foreach (var p in players)
             {
-                p.GetComponent<GamepadCursor>().enabled = false;
+                if(p.GetComponent<GamepadCursor>())
+                    p.GetComponent<GamepadCursor>().enabled = false;
             }
         }
 
@@ -133,11 +135,11 @@ namespace Core
         {
             foreach (var p in players)
             {
-                var player = Instantiate(fightSceneCharacterPrefab);
-                player.SetActive(false);
-                var cs = player.GetComponent<CharacterSetup>();
-                cs.PData = p.playerInstanceData;
-                player.SetActive(true);
+//                var player = Instantiate(fightSceneCharacterPrefab);
+//                player.SetActive(false);
+//                var cs = player.GetComponent<CharacterSetup>();
+//                cs.PData = p.playerInstanceData;
+//                player.SetActive(true);
             }
         }
 
