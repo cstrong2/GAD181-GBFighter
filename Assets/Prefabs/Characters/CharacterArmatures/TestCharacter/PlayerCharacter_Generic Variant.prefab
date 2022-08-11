@@ -7,9 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1130524346274901013, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: analogMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 734055235407361528, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3306641659796007813, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: cData
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7455728213420601522, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: m_Actions

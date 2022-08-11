@@ -973,6 +973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayersManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8675034686879329332, guid: 3a48a9e85c8d602449a4214642bc13b1, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8675034686879329333, guid: 3a48a9e85c8d602449a4214642bc13b1, type: 3}
       propertyPath: m_RootOrder
       value: 3

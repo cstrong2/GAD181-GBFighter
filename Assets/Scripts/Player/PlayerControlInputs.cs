@@ -7,7 +7,7 @@ namespace Player
 	{
 		[Header("Character Input Values")]
 		public Vector2 move;
-		public Vector2 look;
+//		public Vector2 look;
 		public bool jump;
 		public bool sprint;
 		public bool punch;
@@ -17,20 +17,13 @@ namespace Player
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
-		public bool cursorInputForLook = true;
 		
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
 
-		public void OnLook(InputValue value)
-		{
-			if(cursorInputForLook)
-			{
-				LookInput(value.Get<Vector2>());
-			}
-		}
+
 
 		public void OnJump(InputValue value)
 		{
@@ -53,10 +46,7 @@ namespace Player
 			move = newMoveDirection;
 		} 
 
-		public void LookInput(Vector2 newLookDirection)
-		{
-			look = newLookDirection;
-		}
+
 
 		public void JumpInput(bool newJumpState)
 		{

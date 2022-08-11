@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Player;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ScriptableObjects
 {
@@ -15,8 +17,9 @@ namespace ScriptableObjects
         
         [SerializeField] private int maxHealth;
         
+        [FormerlySerializedAs("charAnimator")]
         [Header("Character Animation Data")]
-        [SerializeField] private Animator charAnimator;
+        [SerializeField] private AnimatorController charAnimatorController;
         [SerializeField] private Avatar charAvatar;
         [SerializeField] private Mesh charArmatureMesh;
         
@@ -32,7 +35,7 @@ namespace ScriptableObjects
         public int CharID => charID;
         public float MoveSpeed => moveSpeed;
         public int MaxHealth => maxHealth;
-        public Animator CharAnimator => charAnimator;
+        public AnimatorController CharAnimatorController => charAnimatorController;
         public Avatar CharAvatar => charAvatar;
         public Mesh CharArmatureMesh => charArmatureMesh;
         public GameObject CharPrefab => charPrefab;
