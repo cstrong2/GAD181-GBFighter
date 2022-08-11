@@ -969,10 +969,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8675034686879329330, guid: 3a48a9e85c8d602449a4214642bc13b1, type: 3}
+      propertyPath: fightSceneCharacterPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8675034686879329331, guid: 3a48a9e85c8d602449a4214642bc13b1, type: 3}
       propertyPath: m_Name
       value: PlayersManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8675034686879329332, guid: 3a48a9e85c8d602449a4214642bc13b1, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675034686879329332, guid: 3a48a9e85c8d602449a4214642bc13b1, type: 3}
+      propertyPath: m_PlayerPrefab
+      value: 
+      objectReference: {fileID: 3685084458529299314, guid: bf3af3f4e35e18d418ec7084498effd7, type: 3}
     - target: {fileID: 8675034686879329333, guid: 3a48a9e85c8d602449a4214642bc13b1, type: 3}
       propertyPath: m_RootOrder
       value: 3

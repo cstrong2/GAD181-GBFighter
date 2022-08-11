@@ -8,4 +8,5 @@ namespace Player
         public PlayerData playerInstanceData;
         public PlayerInput playerInput;
     }
+    
 }

@@ -1,6 +1,8 @@
+using System;
 using Attributes;
 using Core;
 using ScriptableObjects;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,10 +16,9 @@ public class CharacterSetup : MonoBehaviour
     [Header("Character Rig and Model")]
     [SerializeField] private CharacterData cData;
     [SerializeField][ReadOnly] private GameObject armature;
-    [SerializeField][ReadOnly] private Animator animator;
+    [SerializeField] private Animator animator;
     [SerializeField] private Avatar avatar;
-    private Transform spawnLocation;
-    
+
     [Header("Player Information")] 
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
@@ -33,92 +34,65 @@ public class CharacterSetup : MonoBehaviour
         }
     }
 
-    public PlayerData PData
+    public PlayerData PData { get; set; }
+
+    public int PlayerID { get; set; }
+
+    public Transform SpawnPosition { get; set; }
+    
+
+    private void OnEnable()
     {
-        get => pData;
-        set => pData = value;
-    }
-
-    public int PlayerID
-    {
-        get => playerID;
-        set => playerID = value;
-    }
-
-    private void Awake()
-    {               
-        this.gameObject.SetActive(false);
-
         
-//        if (PlayersManager.Instance && GameManager.Instance)
-//        {
-//            var playerInstance = PlayersManager.Instance.Players[0];
-//            PData = playerInstance.playerInstanceData;
-//            playerID = PData.PlayerID;
-//            CData = GameManager.Instance.GetCharByID(PData.CurrentCharacterID);
-//            charInstanceName = CData.Name + "-P" + playerID;
-//            playerInput = playerInstance.GetComponent<PlayerInput>();
-//            
-//        }
-//        else
-//        {
-//            Debug.Log("No player manager or game manager was found");
-//            if (playerInput == null)
-//                playerInput = GetComponent<PlayerInput>();
-//        }
-       
-
-        
-        //TODO: REMOVE THIS This is temp code for interim release   
-
-        #region InterimCodeForWeek1ToDelete
-
-        if (PlayersManagerInterim.PMInstance)
+        if (PlayersManager.Instance && GameManager.Instance)
         {
-            spawnLocation = PlayersManagerInterim.PMInstance.SpawnLocations[PlayerID];
-            if(CData)
+            
+            if(PData && CData)
             {
-                Instantiate(armature, transform);
-                this.GetComponent<Transform>().position = spawnLocation.position;
-                this.gameObject.SetActive(true);
+                var playerInstance = PlayersManager.Instance.Players[PData.PlayerID];
+                
+                if (playerInput == null) 
+                    playerInput = playerInstance.GetComponent<PlayerInput>();
+                
+                charInstanceName = PData.PlayerLabelShort;
             }
 
         }
         else
         {
-            if (CData)
+            Debug.Log("No player manager or game manager was found");
+            if (playerInput == null)
+                playerInput = GetComponent<PlayerInput>();
+        }
+        if(CData)
+        {
+            Debug.Log(armature + " should instantiate");
+            Instantiate(armature, transform);
+            this.GetComponent<Transform>().position = SpawnPosition.position;
+        }
+        
+        var animators = GetComponentsInChildren<Animator>();
+        Debug.Log(animators.Length);
+        
+        if (animators.Length > 0)
+        {
+            for (int i = 0; i < animators.Length; i++)
             {
-                Instantiate(armature, transform);
+                if (i > 0)
+                    Destroy(animators[i]);
             }
         }
-
-        #endregion
-
     }
-
-    private void Start()
-    {
-        var playersParent = GameObject.Find("PlayersParent");
-        if (!playersParent) {
-            playersParent = new GameObject();
-            playersParent.name = "PlayersParent";
-        }
-
-        this.transform.parent = playersParent.transform;
-
-       
-    }
+    
 
     public void AssignCharData(CharacterData characterData)
     {
-    
-            animator = GetComponent<Animator>();
-            avatar = animator.avatar;
-            avatar = CData.CharAvatar;
-            animator = CData.CharAnimator;
-            armature = CData.CharPrefab;
-            maxHealth = CData.MaxHealth;
-            currentHealth = maxHealth;
-        
+        animator = GetComponentsInChildren<Animator>()[0];
+        avatar = CData.CharAvatar;
+        animator.avatar = avatar;
+        armature = CData.CharPrefab;
+        maxHealth = CData.MaxHealth;
+        currentHealth = maxHealth;
     }
+
 }

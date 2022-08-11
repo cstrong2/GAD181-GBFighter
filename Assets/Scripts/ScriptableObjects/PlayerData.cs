@@ -32,6 +32,12 @@ namespace ScriptableObjects
             private set => playerLabel = value;
         }
 
+        public string PlayerLabelShort
+        {
+            get => playerLabelShort;
+            private set => playerLabelShort = value;
+        }
+
         private void OnEnable()
         {
             GameEvents.OnPlayerSelectCharacter += AssignCharacter;
@@ -51,9 +57,9 @@ namespace ScriptableObjects
 
         void SetPlayerLabel()
         {
-            int vanityId = playerID + 1;
+            int vanityId = PlayerID + 1;
             PlayerLabel = "Player " + vanityId;
-            playerLabelShort = "P" + vanityId;
+            PlayerLabelShort = "P" + vanityId;
         }
         
         

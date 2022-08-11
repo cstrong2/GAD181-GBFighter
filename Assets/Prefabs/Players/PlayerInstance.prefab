@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 264764323025629291}
   - component: {fileID: 2712220668868456250}
-  - component: {fileID: 3685880076171266398}
   - component: {fileID: -8720767180056125600}
   m_Layer: 0
   m_Name: PlayerInstance
@@ -48,26 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInstanceData: {fileID: 0}
   playerInput: {fileID: -8720767180056125600}
---- !u!114 &3685880076171266398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4324796876720827385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf245eda1193446c8b5869f68b50682b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInput: {fileID: -8720767180056125600}
-  cursor: {fileID: 8492995533083243416, guid: c2d37533384ea6447af4a5f2a6b23330, type: 3}
-  cursorTransform: {fileID: 8492995533083243419, guid: c2d37533384ea6447af4a5f2a6b23330, type: 3}
-  canvas: {fileID: 0}
-  canvasTransform: {fileID: 0}
-  cursorSpeed: 1000
-  screenPadding: 32
-  previousControlScheme: 
 --- !u!114 &-8720767180056125600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +73,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: UI
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 5926e152-1d96-46dd-b754-93e306739d7f
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
