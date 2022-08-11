@@ -101,18 +101,12 @@ using UnityEngine.InputSystem;
 //        }
 
 
-        private void Awake()
+        private void Start()
         {
-            // get a reference to our main camera
             if (_mainCamera == null)
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-        }
-
-        private void Start()
-        {
-            
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<PlayerControlInputs>();

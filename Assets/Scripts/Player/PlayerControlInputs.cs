@@ -23,8 +23,6 @@ namespace Player
 			MoveInput(value.Get<Vector2>());
 		}
 
-
-
 		public void OnJump(InputValue value)
 		{
 			JumpInput(value.isPressed);

@@ -22,7 +22,7 @@ namespace Core
         [SerializeField] [ReadOnly] private int maxPlayers;
         private bool startUpRan = false;
         
-        [SerializeField] private GameObject fightSceneCharacterPrefab;
+//        [SerializeField] private GameObject fightSceneCharacterPrefab;
 
         private const string PlayerMap = "Player", UIMap = "UI";
 
@@ -77,7 +77,6 @@ namespace Core
         private void DoFightSetup()
         {
             DisableGamePads();
-            inputManager.playerPrefab = fightSceneCharacterPrefab;
             SetPlayerInputFightMode();
             inputManager.DisableJoining();
             
@@ -135,17 +134,18 @@ namespace Core
         void SetPlayerInputUIMode()
         {
 
-            foreach (var p in players)
+            foreach (var i in playerInputs)
             {
-                p.playerInput.SwitchCurrentActionMap(UIMap);
+                i.SwitchCurrentActionMap(UIMap);
             } 
         }
 
         void SetPlayerInputFightMode()
         {
-            foreach (var p in players)
+            foreach (var i in playerInputs)
             {
-                p.playerInput.SwitchCurrentActionMap(PlayerMap);
+                i.SwitchCurrentActionMap(PlayerMap);
+                Debug.Log(i.currentActionMap);
             }
         }
         
@@ -154,14 +154,20 @@ namespace Core
             GetSpawnLocations();
             foreach (var p in players)
             {
-                var player = Instantiate(fightSceneCharacterPrefab);
-                var cs = player.GetComponent<CharacterSetup>();
+//                var player = Instantiate(fightSceneCharacterPrefab);
+                var cs = p.GetComponent<CharacterSetup>();
                 cs.playerInput = p.playerInput;
                 cs.transform.parent = p.transform;
                 cs.SpawnPosition = spawnPositions[p.playerInstanceData.PlayerID];
                 cs.PData = p.playerInstanceData;
                 cs.CData = GameManager.Instance.GetCharByID(p.playerInstanceData.CurrentCharacterID);
                 Debug.Log(p + " has been iterated on");
+
+                p.GetComponent<TopDownController>().enabled = true;
+                p.GetComponent<CharacterController>().enabled = true;
+                p.GetComponent<Animator>().enabled = true;
+                cs.enabled = true;
+
             }
         }
 
@@ -176,13 +182,11 @@ namespace Core
         private void SetUpPlayerData(PlayerInstance playerInstance, PlayerInput player)
         {
             var pData = ScriptableObject.CreateInstance<PlayerData>();
-            pData.name = pData.PlayerLabel;
             pData.PlayerID = player.playerIndex;
+            pData.name = pData.PlayerLabel;
             playerInstance.name = pData.PlayerLabel;
             playerInstance.playerInstanceData = pData;
             playerInstance.transform.parent = this.transform;
         }
-
-        
     }
 }

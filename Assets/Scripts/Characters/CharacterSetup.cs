@@ -1,3 +1,4 @@
+using System;
 using Attributes;
 using Core;
 using ScriptableObjects;
@@ -15,11 +16,9 @@ public class CharacterSetup : MonoBehaviour
     [Header("Character Rig and Model")]
     [SerializeField] private CharacterData cData;
     [SerializeField][ReadOnly] private GameObject armature;
-    [SerializeField][ReadOnly] private AnimatorController animatorController;
     [SerializeField] private Animator animator;
     [SerializeField] private Avatar avatar;
-    private Transform spawnPosition;
-    
+
     [Header("Player Information")] 
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
@@ -35,33 +34,19 @@ public class CharacterSetup : MonoBehaviour
         }
     }
 
-    public PlayerData PData
-    {
-        get => pData;
-        set => pData = value;
-    }
+    public PlayerData PData { get; set; }
 
-    public int PlayerID
-    {
-        get => playerID;
-        set => playerID = value;
-    }
+    public int PlayerID { get; set; }
 
-    public Transform SpawnPosition
-    {
-        get => spawnPosition;
-        set => spawnPosition = value;
-    }
+    public Transform SpawnPosition { get; set; }
+    
 
-    private void Awake()
+    private void OnEnable()
     {
-//        DestroyImmediate(GetComponent<PlayerInput>());
         
         if (PlayersManager.Instance && GameManager.Instance)
         {
-//            PData = playerInstance.playerInstanceData;
-//            playerID = PData.PlayerID;
-//            CData = GameManager.Instance.GetCharByID(PData.CurrentCharacterID);
+            
             if(PData && CData)
             {
                 var playerInstance = PlayersManager.Instance.Players[PData.PlayerID];
@@ -79,42 +64,32 @@ public class CharacterSetup : MonoBehaviour
             if (playerInput == null)
                 playerInput = GetComponent<PlayerInput>();
         }
-        
-    }
-
-    private void Start()
-    {
-        
-//        var playersParent = GameObject.Find("PlayersParent");
-//        if (!playersParent) {
-//            playersParent = new GameObject();
-//            playersParent.name = "PlayersParent";
-//        }
-//
-//        this.transform.parent = playersParent.transform;
-        
         if(CData)
         {
+            Debug.Log(armature + " should instantiate");
             Instantiate(armature, transform);
             this.GetComponent<Transform>().position = SpawnPosition.position;
         }
         
         var animators = GetComponentsInChildren<Animator>();
         Debug.Log(animators.Length);
-        for (int i = 0; i < animators.Length; i++)
+        
+        if (animators.Length > 0)
         {
-            if (i > 0)
-                Destroy(animators[i]);
+            for (int i = 0; i < animators.Length; i++)
+            {
+                if (i > 0)
+                    Destroy(animators[i]);
+            }
         }
-       
     }
+    
 
     public void AssignCharData(CharacterData characterData)
     {
         animator = GetComponentsInChildren<Animator>()[0];
         avatar = CData.CharAvatar;
         animator.avatar = avatar;
-        animator.runtimeAnimatorController = CData.CharAnimatorController;
         armature = CData.CharPrefab;
         maxHealth = CData.MaxHealth;
         currentHealth = maxHealth;
