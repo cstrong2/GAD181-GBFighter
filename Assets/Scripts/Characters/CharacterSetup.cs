@@ -2,6 +2,8 @@ using System;
 using Attributes;
 using Events;
 using ScriptableObjects;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -61,16 +63,18 @@ public class CharacterSetup : MonoBehaviour
     {
         Instantiate(armature, transform);
         this.GetComponent<Transform>().position = SpawnPosition.position;
+        animator = this.AddComponent<Animator>();
+        animator.runtimeAnimatorController = CData.CharAnimatorController;
+        animator.avatar = avatar;
         animator.enabled = true;
-        animator.ResetTrigger("MotionSpeed");
     }
     
     public void AssignCharData(CharacterData characterData)
     {
         avatar = CData.CharAvatar;
-        animator = GetComponentInChildren<Animator>();
-        animator.enabled = false;
-        animator.avatar = avatar;
+//        animator = GetComponentInChildren<Animator>();
+//        animator.enabled = false;
+        
         armature = CData.CharPrefab;
         maxHealth = CData.MaxHealth;
         currentHealth = maxHealth;
