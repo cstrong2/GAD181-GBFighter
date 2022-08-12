@@ -62,7 +62,7 @@ public class CharacterSetup : MonoBehaviour
         Instantiate(armature, transform);
         this.GetComponent<Transform>().position = SpawnPosition.position;
         animator.enabled = true;
-        animator.ResetTrigger("MoveSpeed");
+        animator.ResetTrigger("MotionSpeed");
     }
     
     public void AssignCharData(CharacterData characterData)
