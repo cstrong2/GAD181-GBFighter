@@ -13,16 +13,17 @@ namespace Core
     public class PlayersManager : MonoBehaviour
     {
         public static PlayersManager Instance = null;
-
-        private PlayerInputManager inputManager;
+        [Space]
+        [SerializeField] private GameData gameData;
+        [SerializeField] [ReadOnly] private bool startUpRan = false;
+        [Space]
+        [SerializeField] private PlayerInputManager inputManager;
+        [Header("Player References")]
         [SerializeField] private List<PlayerInstance> players;
         [SerializeField] private List<PlayerInput> playerInputs;
-
         [SerializeField] private List<Transform> spawnPositions;
         [SerializeField] [ReadOnly] private int maxPlayers;
-        private bool startUpRan = false;
         
-//        [SerializeField] private GameObject fightSceneCharacterPrefab;
 
         private const string PlayerMap = "Player", UIMap = "UI";
 
@@ -60,7 +61,7 @@ namespace Core
 
         private void OnEnable()
         {
-            GameEvents.OnLoadGameDataEvent += SetGameData;
+            SetGameData(gameData.MaxPlayers);
             inputManager.onPlayerJoined += AddPlayer;
             GameEvents.OnFightSceneLoadingEvent += DoFightSetup;
             GameEvents.OnFightSceneHasLoadedEvent += SpawnCombatants;
@@ -70,7 +71,6 @@ namespace Core
         
         private void OnDisable()
         {
-            GameEvents.OnLoadGameDataEvent -= SetGameData;
             inputManager.onPlayerJoined -= AddPlayer;
             GameEvents.OnFightSceneLoadingEvent -= DoFightSetup;
             GameEvents.OnFightSceneHasLoadedEvent -= SpawnCombatants;
@@ -157,14 +157,12 @@ namespace Core
             GetSpawnLocations();
             foreach (var p in players)
             {
-//                var player = Instantiate(fightSceneCharacterPrefab);
                 var cs = p.GetComponent<CharacterSetup>();
                 cs.playerInput = p.playerInput;
                 cs.transform.parent = p.transform;
-//                cs.PData = p.playerInstanceData;
                 cs.SpawnPosition = spawnPositions[p.playerInstanceData.PlayerID];
                 
-                cs.CData = GameManager.Instance.GetCharByID(p.playerInstanceData.CurrentCharacterID);
+                cs.CData = gameData.characterDB.GetCharByID(p.playerInstanceData.CurrentCharacterID);
                 Debug.Log(p + " has been iterated on");
 
                 p.GetComponent<TopDownController>().enabled = true;
@@ -197,9 +195,9 @@ namespace Core
         private void SetCharData(int charid, int playerid)
         {
             Debug.Log("CurrentChar ID = " + charid + " from player " + playerid);
-            var character = GameManager.Instance.GetCharByID(charid);
-            players.Find(p => p.playerInstanceData.PlayerID == playerid).GetComponent<CharacterSetup>().CData =
-                character;
+//            var character = GameManager.Instance.GetCharByID(charid);
+//            players.Find(p => p.playerInstanceData.PlayerID == playerid).GetComponent<CharacterSetup>().CData =
+//                character;
         }
     }
 }

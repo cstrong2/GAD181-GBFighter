@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: d9f1252cc726e704ebab1e653810e943, type: 2}
   fightScene: FightSceneTest
+  characterSelectScene: UI_CharacterSelection

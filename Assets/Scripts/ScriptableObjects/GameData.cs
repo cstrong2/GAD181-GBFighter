@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Events;
+using UnityEngine;
 
 namespace ScriptableObjects
 {
@@ -13,6 +15,10 @@ namespace ScriptableObjects
         [Header("Character Database")]
         [SerializeField] public CharacterDatabase characterDB;
         public int MaxPlayers => maxPlayers;
-        
+
+        private void OnEnable()
+        {
+            GameEvents.OnLoadGameDataEvent?.Invoke(MaxPlayers);
+        }
     }
 }

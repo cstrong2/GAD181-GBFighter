@@ -56,7 +56,7 @@ namespace Core
             }
             // Set a random character from the db to the player
             var cSetup = player.GetComponent<CharacterSetup>();
-            cSetup.CData = GameManager.Instance.GetCharByID(Random.Range(0, characterDB.charactersList.Count - 1));
+//            cSetup.CData = GameManager.Instance.GetCharByID(Random.Range(0, characterDB.charactersList.Count - 1));
             cSetup.PlayerID = player.playerIndex;
         }
     }

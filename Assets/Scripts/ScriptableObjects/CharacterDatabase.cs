@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -10,5 +8,10 @@ namespace ScriptableObjects
     public class CharacterDatabase : ScriptableObject
     {
         public List<CharacterData> charactersList;
+        
+        public CharacterData GetCharByID(int id)
+        {
+            return charactersList.Find(m => m.CharID == id);
+        }
     }
 }

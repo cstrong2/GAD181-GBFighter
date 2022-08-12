@@ -46,7 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
-  fightSceneCharacterPrefab: {fileID: 7455728213420601534, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+  playerInputs: []
+  gameData: {fileID: 11400000, guid: d9f1252cc726e704ebab1e653810e943, type: 2}
+  spawnPositions: []
+  maxPlayers: 0
 --- !u!114 &8675034686879329332
 MonoBehaviour:
   m_ObjectHideFlags: 0

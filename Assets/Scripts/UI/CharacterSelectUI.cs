@@ -10,7 +10,7 @@ namespace UI
         [SerializeField] private GameObject characterUI;
         [SerializeField] private GridLayoutGroup grid;
         [SerializeField] List<CharacterUI> characterUIList = null;
-        private void Awake()
+        private void Start()
         {
             grid = GetComponentInChildren<GridLayoutGroup>();
             GenerateCharacterGrid();

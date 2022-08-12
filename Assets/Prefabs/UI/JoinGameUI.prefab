@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPortraitsParent: {fileID: 1518653285751625131}
   playerPositionPrefab: {fileID: 5311885104120005074, guid: b9a267b60119bd947b2a840f395066c6, type: 3}
+  gameData: {fileID: 11400000, guid: d9f1252cc726e704ebab1e653810e943, type: 2}
   playerUIStates: []
   readyButton: {fileID: 1468776111789547673}
 --- !u!114 &4434927955027931107

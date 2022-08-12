@@ -12,7 +12,14 @@ namespace Core
 
         [SerializeField] private GameData gameData;
 
+        public GameData GameData
+        {
+            get => gameData;
+            private set => gameData = value;
+        }
+
         [SerializeField] private string fightScene;
+        [SerializeField] private string characterSelectScene;
 
 
         private void Awake()
@@ -39,17 +46,7 @@ namespace Core
             GameEvents.OnAllPlayersReadyEvent -= LoadFightScene;
             SceneManager.sceneLoaded -= FightSceneHasLoaded;
         }
-
-        private void Start()
-        {
-            GameEvents.OnLoadGameDataEvent?.Invoke(gameData.MaxPlayers);
-        }
-
-        public CharacterData GetCharByID(int id)
-        {
-            return gameData.characterDB.charactersList.Find(m => m.CharID == id);
-        }
-
+        
         void LoadFightScene()
         {
             SceneManager.LoadScene(fightScene);
@@ -63,5 +60,11 @@ namespace Core
                 GameEvents.OnFightSceneHasLoadedEvent?.Invoke();
             }
         }
+
+        public void LoadCharacterSelectScreen()
+        {
+            SceneManager.LoadScene(characterSelectScene);
+        }
+        
     }
 }

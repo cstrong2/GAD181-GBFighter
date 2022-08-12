@@ -16,6 +16,8 @@ namespace UI
         
         [SerializeField]
         private GameObject playerPositionPrefab;
+
+        [SerializeField] private GameData gameData;
         
         [SerializeField]
         private List<PlayerUIState> playerUIStates;
@@ -24,7 +26,7 @@ namespace UI
 
         private void OnEnable()
         {
-            GameEvents.OnLoadGameDataEvent += CreatePlayerPositions;
+            CreatePlayerPositions(gameData.MaxPlayers);
             GameEvents.OnNewPlayerJoinedEvent += ActivatePlayerPosition;
             GameEvents.OnPlayerSelectCharacter += SetPlayerImage;
             readyButton.onClick.AddListener(() => GameEvents.OnAllPlayersReadyEvent?.Invoke());
@@ -32,7 +34,6 @@ namespace UI
 
         private void OnDisable()
         {
-            GameEvents.OnLoadGameDataEvent -= CreatePlayerPositions;
             GameEvents.OnNewPlayerJoinedEvent -= ActivatePlayerPosition;
             GameEvents.OnPlayerSelectCharacter -= SetPlayerImage;
         }
@@ -60,7 +61,7 @@ namespace UI
         private void SetPlayerImage(int charID, int playerID)
         {
             var player = playerUIStates[playerID];
-            CharacterData data = GameManager.Instance.GetCharByID(charID);
+            CharacterData data = gameData.characterDB.GetCharByID(charID);
             player.image.sprite = data.CharImage;
             player.characterLabel.text = data.Name;
             player.playerReady = true;
