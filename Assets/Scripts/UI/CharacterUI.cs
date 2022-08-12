@@ -25,12 +25,12 @@ namespace UI
 
         private void OnEnable()
         {
-            selectionButton.onClick.AddListener(CharacterSelected);
+            GameEvents.OnPlayerClickedEvent += CharacterSelected;
         }
 
-        void CharacterSelected()
+        void CharacterSelected(int playerID)
         {
-            GameEvents.OnPlayerSelectCharacter?.Invoke(charID, 0); // how do we get this player id?
+            selectionButton.onClick.AddListener(() => GameEvents.OnPlayerSelectCharacter?.Invoke(charID, playerID));
         }
     }
 }

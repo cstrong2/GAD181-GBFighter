@@ -4,6 +4,7 @@ using Core;
 using Events;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI
