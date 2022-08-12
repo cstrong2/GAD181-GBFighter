@@ -1,7 +1,8 @@
 using System;
 using Attributes;
-using Core;
+using Events;
 using ScriptableObjects;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +19,7 @@ public class CharacterSetup : MonoBehaviour
     [SerializeField][ReadOnly] private GameObject armature;
     [SerializeField] private Animator animator;
     [SerializeField] private Avatar avatar;
-
+    
     [Header("Player Information")] 
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
@@ -34,65 +35,55 @@ public class CharacterSetup : MonoBehaviour
         }
     }
 
-    public PlayerData PData { get; set; }
-
-    public int PlayerID { get; set; }
+    public PlayerData PData {
+        get => pData;
+        set
+        {
+            pData = value;
+            AssignPlayerData(PData);
+        }
+    }
+    
+    public int PlayerID { get => playerID; set => playerID = value; }
 
     public Transform SpawnPosition { get; set; }
     
 
     private void OnEnable()
     {
-        
-        if (PlayersManager.Instance && GameManager.Instance)
-        {
-            
-            if(PData && CData)
-            {
-                var playerInstance = PlayersManager.Instance.Players[PData.PlayerID];
-                
-                if (playerInput == null) 
-                    playerInput = playerInstance.GetComponent<PlayerInput>();
-                
-                charInstanceName = PData.PlayerLabelShort;
-            }
-
-        }
-        else
-        {
-            Debug.Log("No player manager or game manager was found");
-            if (playerInput == null)
-                playerInput = GetComponent<PlayerInput>();
-        }
-        if(CData)
-        {
-            Debug.Log(armature + " should instantiate");
-            Instantiate(armature, transform);
-            this.GetComponent<Transform>().position = SpawnPosition.position;
-        }
-        
-        var animators = GetComponentsInChildren<Animator>();
-        Debug.Log(animators.Length);
-        
-        if (animators.Length > 0)
-        {
-            for (int i = 0; i < animators.Length; i++)
-            {
-                if (i > 0)
-                    Destroy(animators[i]);
-            }
-        }
+        GameEvents.OnFightSceneHasLoadedEvent += SpawnCharacter;
     }
     
+    private void OnDisable()
+    {
+        GameEvents.OnFightSceneHasLoadedEvent -= SpawnCharacter;
+    }
 
+    private void SpawnCharacter()
+    {
+        Instantiate(armature, transform);
+        this.GetComponent<Transform>().position = SpawnPosition.position;
+        animator = this.AddComponent<Animator>();
+        animator.runtimeAnimatorController = CData.CharAnimatorController;
+        animator.avatar = avatar;
+        animator.enabled = true;
+    }
+    
     public void AssignCharData(CharacterData characterData)
     {
-        animator = GetComponentsInChildren<Animator>()[0];
         avatar = CData.CharAvatar;
-        animator.avatar = avatar;
+//        animator = GetComponentInChildren<Animator>();
+//        animator.enabled = false;
+        
         armature = CData.CharPrefab;
         maxHealth = CData.MaxHealth;
         currentHealth = maxHealth;
     }
-
+    
+    private void AssignPlayerData(PlayerData playerData)
+    {
+        PlayerID = playerData.PlayerID;
+        charInstanceName = playerData.PlayerLabelShort;
+    }
+    
 }

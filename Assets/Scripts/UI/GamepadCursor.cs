@@ -37,6 +37,7 @@ namespace UI
             
             #region CursorSetup
                 cursor = Instantiate(cursor, canvas.transform);
+                cursor.SetActive(true);
                 cursor.name = "Cursor";
                 cursorTransform = cursor.GetComponent<RectTransform>();
             #endregion

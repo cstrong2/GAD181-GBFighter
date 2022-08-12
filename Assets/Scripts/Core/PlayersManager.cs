@@ -64,6 +64,8 @@ namespace Core
             inputManager.onPlayerJoined += AddPlayer;
             GameEvents.OnFightSceneLoadingEvent += DoFightSetup;
             GameEvents.OnFightSceneHasLoadedEvent += SpawnCombatants;
+            GameEvents.OnPlayerSelectedCharacterEvent += SetCharData;
+
         }
         
         private void OnDisable()
@@ -72,6 +74,7 @@ namespace Core
             inputManager.onPlayerJoined -= AddPlayer;
             GameEvents.OnFightSceneLoadingEvent -= DoFightSetup;
             GameEvents.OnFightSceneHasLoadedEvent -= SpawnCombatants;
+            GameEvents.OnPlayerSelectedCharacterEvent -= SetCharData;
         }
 
         private void DoFightSetup()
@@ -158,16 +161,16 @@ namespace Core
                 var cs = p.GetComponent<CharacterSetup>();
                 cs.playerInput = p.playerInput;
                 cs.transform.parent = p.transform;
+//                cs.PData = p.playerInstanceData;
                 cs.SpawnPosition = spawnPositions[p.playerInstanceData.PlayerID];
-                cs.PData = p.playerInstanceData;
+                
                 cs.CData = GameManager.Instance.GetCharByID(p.playerInstanceData.CurrentCharacterID);
                 Debug.Log(p + " has been iterated on");
 
                 p.GetComponent<TopDownController>().enabled = true;
                 p.GetComponent<CharacterController>().enabled = true;
-                p.GetComponent<Animator>().enabled = true;
                 cs.enabled = true;
-
+                
             }
         }
 
@@ -187,6 +190,16 @@ namespace Core
             playerInstance.name = pData.PlayerLabel;
             playerInstance.playerInstanceData = pData;
             playerInstance.transform.parent = this.transform;
+            var cs = playerInstance.GetComponent<CharacterSetup>();
+            cs.PData = pData;
+        }
+        
+        private void SetCharData(int charid, int playerid)
+        {
+            Debug.Log("CurrentChar ID = " + charid + " from player " + playerid);
+            var character = GameManager.Instance.GetCharByID(charid);
+            players.Find(p => p.playerInstanceData.PlayerID == playerid).GetComponent<CharacterSetup>().CData =
+                character;
         }
     }
 }

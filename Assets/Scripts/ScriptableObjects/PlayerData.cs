@@ -23,7 +23,15 @@ namespace ScriptableObjects
             }
         }
         
-        public int CurrentCharacterID => currentCharacterID;
+        public int CurrentCharacterID
+        {
+            get => currentCharacterID;
+            set
+            {
+                currentCharacterID = value;
+                GameEvents.OnPlayerSelectedCharacterEvent?.Invoke(currentCharacterID, playerID);
+            }
+        }
 
 
         public string PlayerLabel
@@ -52,7 +60,7 @@ namespace ScriptableObjects
         {
             if (playerID != this.playerID)
                 return;
-            currentCharacterID = charID;
+            CurrentCharacterID = charID;
         }
 
         void SetPlayerLabel()
