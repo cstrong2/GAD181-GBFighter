@@ -3,6 +3,7 @@ using ScriptableObjects;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Serialization;
 
 namespace Player
@@ -11,7 +12,7 @@ namespace Player
     {
         public PlayerData playerInstanceData;
         public PlayerInput playerInput;
-        
+        public InputSystemUIInputModule uiInputModule;
         private const string Click = "Click";
 //        public GamepadCursor gamepadCursor;
 //
@@ -29,12 +30,15 @@ namespace Player
 
         private void OnEnable()
         {
+//            uiInputModule = GameObject.Find("EventSystem").GetComponent<InputSystemUIInputModule>();
+//            playerInput.uiInputModule = uiInputModule;
             playerInput.actions.FindAction(Click).performed += PassPlayerInputID;
         }
 
         void PassPlayerInputID(InputAction.CallbackContext ctx)
         {
             GameEvents.OnPlayerClickedEvent?.Invoke(playerInput.playerIndex);
+            Debug.Log($"Player {playerInput.playerIndex} clicked");
         }
 
 //        void SetCursorState()

@@ -140,6 +140,7 @@ namespace Core
             foreach (var i in playerInputs)
             {
                 i.SwitchCurrentActionMap(UIMap);
+                i.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
             } 
         }
 
@@ -148,6 +149,7 @@ namespace Core
             foreach (var i in playerInputs)
             {
                 i.SwitchCurrentActionMap(PlayerMap);
+                i.notificationBehavior = PlayerNotifications.SendMessages;
                 Debug.Log(i.currentActionMap);
             }
         }

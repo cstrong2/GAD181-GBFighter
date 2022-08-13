@@ -1,5 +1,8 @@
-﻿using TMPro;
+﻿using Core;
+using Player;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI
@@ -9,7 +12,8 @@ namespace UI
         
         [SerializeField] private GameObject playerActive;
         [SerializeField] private GameObject playerInactive;
-
+        protected PlayerInput playerInput;
+        private JoinGameUI parentUI;
         [SerializeField] private Toggle state;
         
         
@@ -43,6 +47,7 @@ namespace UI
         private void Awake()
         {
             playerReady = false;
+            parentUI = GetComponentInParent<JoinGameUI>();
         }
 
         private void Update()
@@ -56,6 +61,9 @@ namespace UI
             {
                 case Toggle.Active : 
                     playerActive.SetActive(true);
+                    playerInput = PlayerInput.GetPlayerByIndex(AssignedPlayerID);
+                    var action = playerInput.actions.FindAction("Navigate");
+                    action.performed += TheThing;
                     playerInactive.SetActive(false);
                     break;
                 case Toggle.Inactive: 
@@ -64,7 +72,25 @@ namespace UI
                     break;
             }
         }
+        
+        private void TheThing(InputAction.CallbackContext obj)
+        {
+            PlayerInstance player = PlayersManager.Instance.Players[AssignedPlayerID];
+            var direction = obj.ReadValue<Vector2>();
+            Debug.Log($"PlayerInput is {playerInput.playerIndex} and we are navigating, the phase is {obj.phase} and value is {obj.ReadValue<Vector2>()}");
+            if (direction.x < -.5f)
+            {
+                player.playerInstanceData.CurrentCharacterID -= 1;
+                if (player.playerInstanceData.CurrentCharacterID < 0) player.playerInstanceData.CurrentCharacterID = 0;
+                Debug.Log("Left");
+            } else if (direction.x > .5f)
+            {
+                player.playerInstanceData.CurrentCharacterID += 1;
+                if (player.playerInstanceData.CurrentCharacterID > 3) player.playerInstanceData.CurrentCharacterID = 3;
+                Debug.Log("Right");
+            }  
+            parentUI.SetPlayerImage(player.playerInstanceData.CurrentCharacterID, player.playerInstanceData.PlayerID);
 
-       
+        }
     }
 }

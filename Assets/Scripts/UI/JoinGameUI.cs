@@ -58,7 +58,7 @@ namespace UI
             DeterminePlayersReady();
         }
         
-        private void SetPlayerImage(int charID, int playerID)
+        public void SetPlayerImage(int charID, int playerID)
         {
             var player = playerUIStates[playerID];
             CharacterData data = gameData.characterDB.GetCharByID(charID);

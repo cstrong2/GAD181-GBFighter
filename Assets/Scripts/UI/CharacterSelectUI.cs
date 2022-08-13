@@ -6,12 +6,14 @@ namespace UI
 {
     public class CharacterSelectUI : MonoBehaviour
     {
+        public static CharacterSelectUI Instance;
         [SerializeField] private CharacterDatabase characterDatabase;
         [SerializeField] private GameObject characterUI;
         [SerializeField] private GridLayoutGroup grid;
         [SerializeField] List<CharacterUI> characterUIList = null;
         private void Start()
         {
+            Instance = this;
             grid = GetComponentInChildren<GridLayoutGroup>();
             GenerateCharacterGrid();
         }

@@ -453,7 +453,7 @@
                     "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": "Gamepad;PS4 Controller;Xbox Controller",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -636,6 +636,17 @@
                 },
                 {
                     "name": "",
+                    "id": "446b494f-4a49-449a-8a4e-369b74eca35c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad;PS4 Controller;Xbox Controller",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "0634caa2-08cb-4ee0-88a7-1ee021ec6342",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -739,7 +750,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Gamepad;PS4 Controller;Xbox Controller",
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
