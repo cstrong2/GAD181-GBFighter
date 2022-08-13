@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61c20d4b9ad4bf09bd07dddf7baa73f, type: 3}
+  m_Name: GaskMaskRyan
+  m_EditorClassIdentifier: 
+  charImage: {fileID: 21300000, guid: 40597a3c30e873e4ab3b7bae1127c7a2, type: 3}
+  name: Gas Mask Ryan
+  charID: 1
+  moveSpeed: 100
+  maxHealth: 100
+  charAnimatorController: {fileID: 9100000, guid: 40db3173a05ae3242b1c182a09b0a183, type: 2}
+  charAvatar: {fileID: 9000000, guid: 44affff02d9456544963583cfa4afabb, type: 3}
+  charArmatureMesh: {fileID: -5523277661179574252, guid: 44affff02d9456544963583cfa4afabb, type: 3}
+  charPrefab: {fileID: 919132149155446097, guid: 44affff02d9456544963583cfa4afabb, type: 3}
+  actionList:
+  - name: SuperPunch
+    damage: 10
+    reach: 5
+    speed: 1
+    animationClip: {fileID: 0}

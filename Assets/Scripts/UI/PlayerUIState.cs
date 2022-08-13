@@ -57,18 +57,18 @@ namespace UI
 
         public void SetToggleState(Toggle newState)
         {
-            playerInput = PlayerInput.GetPlayerByIndex(AssignedPlayerID);
-            var action = playerInput.actions.FindAction("Navigate");
+            
             switch (newState)
             {
                 case Toggle.Active : 
                     playerActive.SetActive(true);
+                    playerInput = PlayerInput.GetPlayerByIndex(AssignedPlayerID);
+                    var action = playerInput.actions.FindAction("Navigate");
                     action.performed += TheThing;
                     playerInactive.SetActive(false);
                     break;
                 case Toggle.Inactive: 
                     playerInactive.SetActive(true);
-                    action.performed -= TheThing;
                     playerActive.SetActive(false);
                     break;
             }
@@ -88,7 +88,7 @@ namespace UI
             } else if (direction.x > .5f)
             {
                 pInstance.CurrentCharacterID += 1;
-                if (pInstance.CurrentCharacterID > 3) pInstance.CurrentCharacterID = 3;
+                if (pInstance.CurrentCharacterID > GameManager.Instance.GameData.characterDB.charactersList.Count) pInstance.CurrentCharacterID = GameManager.Instance.GameData.characterDB.charactersList.Count;
 //                Debug.Log("Right");
             }  
             parentUI.SetPlayerImage(pInstance.CurrentCharacterID, pInstance.PlayerID);
