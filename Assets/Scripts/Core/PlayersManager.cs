@@ -82,7 +82,6 @@ namespace Core
             DisableGamePads();
             SetPlayerInputFightMode();
             inputManager.DisableJoining();
-            
         }
 
         private void AddPlayer(PlayerInput player)
@@ -156,6 +155,7 @@ namespace Core
         
         private void SpawnCombatants()
         {
+            GameEvents.OnUISetUpEvent?.Invoke(players);
             GetSpawnLocations();
             foreach (var p in players)
             {

@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Player
 {
     [Serializable]
-    public class Action
+    public class Action : ScriptableObject
     {
-        public string name;
+        public new string name;
         public int damage;
         public float reach;
         public float speed;

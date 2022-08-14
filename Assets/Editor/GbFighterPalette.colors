@@ -21,3 +21,11 @@ MonoBehaviour:
     m_Color: {r: 0.64705884, g: 0.63529414, b: 0.64705884, a: 1}
   - m_Name: GbMonoLight
     m_Color: {r: 1, g: 0.9843137, b: 1, a: 1}
+  - m_Name: GbHueDark
+    m_Color: {r: 0.11372549, g: 0.22352941, b: 0.22352941, a: 1}
+  - m_Name: GbHueMediumDark
+    m_Color: {r: 0.15294118, g: 0.4627451, b: 0.3647059, a: 1}
+  - m_Name: GbHueMediumLight
+    m_Color: {r: 0.38431373, g: 0.72156864, b: 0.4862745, a: 1}
+  - m_Name: GbHueLight
+    m_Color: {r: 0.83137256, g: 0.92156863, b: 0.64705884, a: 1}

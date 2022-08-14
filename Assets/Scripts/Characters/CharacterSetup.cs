@@ -1,3 +1,4 @@
+using System;
 using Attributes;
 using Events;
 using ScriptableObjects;
@@ -8,9 +9,9 @@ using UnityEngine.InputSystem;
 public class CharacterSetup : MonoBehaviour
 {
     [Header("Character Stats")] 
-    [SerializeField][ReadOnly] private string charInstanceName;
-    [SerializeField][ReadOnly] private int maxHealth;
-    public int currentHealth;
+    public string charInstanceName;
+    public int maxHealth;
+    [SerializeField] private int currentHealth;
     
     [Header("Character Rig and Model")]
     [SerializeField] private CharacterData cData;
@@ -82,6 +83,24 @@ public class CharacterSetup : MonoBehaviour
     {
         PlayerID = playerData.PlayerID;
         charInstanceName = playerData.PlayerLabelShort;
+    }
+
+//    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
+    private void Update()
+    {
+        if (Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            AlterCharacterHealth(-20);
+        }
+    }
+
+    void AlterCharacterHealth(int amount)
+    {
+        int alteredHealth = this.currentHealth += amount;
+        this.currentHealth = alteredHealth >= maxHealth ? maxHealth : alteredHealth;
+        float healthAsPercent = (float)this.currentHealth / (float)maxHealth;
+        GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
+        Debug.Log("OnCharDamagedEvent ran " + playerID + " " + healthAsPercent);
     }
     
 }

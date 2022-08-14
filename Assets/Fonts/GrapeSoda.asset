@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: GrapeSoda
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1263591384
   material: {fileID: 9219900847060748564}
-  materialHashCode: 0
+  materialHashCode: -1643787016
   m_Version: 1.1.0
   m_SourceFontFileGUID: 71352f8ed7c50144abfd0c0a2b65b48b
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 71352f8ed7c50144abfd0c0a2b65b48b, type: 3}
