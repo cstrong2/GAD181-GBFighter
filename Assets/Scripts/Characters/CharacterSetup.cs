@@ -1,13 +1,13 @@
-using System;
 using System.Linq;
 using Attributes;
 using Events;
+using Interfaces;
 using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterSetup : MonoBehaviour
+public class CharacterSetup : MonoBehaviour, IDamageable
 {
     [Header("Character Stats")] 
     public string charInstanceName;
@@ -64,7 +64,12 @@ public class CharacterSetup : MonoBehaviour
         var armatureInstance = Instantiate(armature, transform);
         var animators = armatureInstance.GetComponentsInChildren<Animator>().ToList();
         Debug.Log(animators[0]);
-            DestroyImmediate(animators[0]);
+        for (int i = 0; i < animators.Count; i++)
+        {
+            if (i >= 1)
+                DestroyImmediate(animators[i]);
+        }
+            
         
         this.GetComponent<Transform>().position = SpawnPosition.position;
         animator = this.AddComponent<Animator>();
@@ -91,22 +96,20 @@ public class CharacterSetup : MonoBehaviour
         charInstanceName = playerData.PlayerLabelShort;
     }
 
-//    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
-    private void Update()
+    public void DoDamage(int damageAmount)
     {
-        if (Keyboard.current.qKey.wasPressedThisFrame)
-        {
-            AlterCharacterHealth(-20);
-        }
-    }
-
-    void AlterCharacterHealth(int amount)
-    {
-        int alteredHealth = this.currentHealth += amount;
+        int alteredHealth = this.currentHealth += damageAmount;
         this.currentHealth = alteredHealth >= maxHealth ? maxHealth : alteredHealth;
         float healthAsPercent = (float)this.currentHealth / (float)maxHealth;
         GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
-        Debug.Log("OnCharDamagedEvent ran " + playerID + " " + healthAsPercent);
     }
     
+    ////    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
+//    private void Update()
+//    {
+//        if (Keyboard.current.qKey.wasPressedThisFrame)
+//        {
+//            DoDamage(-20);
+//        }
+//    }
 }
