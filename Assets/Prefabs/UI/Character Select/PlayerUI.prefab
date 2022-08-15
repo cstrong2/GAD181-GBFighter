@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32, y: -32}
-  m_SizeDelta: {x: 64, y: 64}
+  m_AnchoredPosition: {x: 36, y: -36}
+  m_SizeDelta: {x: 72, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5956555630749502186
 CanvasRenderer:
@@ -220,6 +220,7 @@ MonoBehaviour:
   playerIDText: {fileID: 7323086021167057584}
   characterLabel: {fileID: 5134493427782479574}
   image: {fileID: 1304963192197616564}
+  playerReady: 0
 --- !u!1001 &162464936985172371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,6 +402,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5404742971314710234}
     m_Modifications:
+    - target: {fileID: 3630344917712145680, guid: afc6c3b4415b69843841e12bedce5516, type: 3}
+      propertyPath: m_fontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630344917712145680, guid: afc6c3b4415b69843841e12bedce5516, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630344917712145680, guid: afc6c3b4415b69843841e12bedce5516, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5137944711132006198, guid: afc6c3b4415b69843841e12bedce5516, type: 3}
       propertyPath: m_Name
       value: PlayerCountText
