@@ -69,14 +69,12 @@ public class CharacterSetup : MonoBehaviour, IDamageable
             if (i >= 1)
                 DestroyImmediate(animators[i]);
         }
-            
         
         this.GetComponent<Transform>().position = SpawnPosition.position;
         animator = this.AddComponent<Animator>();
         animator.runtimeAnimatorController = CData.CharAnimatorController;
         animator.avatar = avatar;
         animator.enabled = true;
-        
     }
     
     public void AssignCharData(CharacterData characterData)
