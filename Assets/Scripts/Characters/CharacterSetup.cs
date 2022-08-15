@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Attributes;
 using Events;
 using ScriptableObjects;
@@ -60,12 +61,17 @@ public class CharacterSetup : MonoBehaviour
 
     private void SpawnCharacter()
     {
-        Instantiate(armature, transform);
+        var armatureInstance = Instantiate(armature, transform);
+        var animators = armatureInstance.GetComponentsInChildren<Animator>().ToList();
+        Debug.Log(animators[0]);
+            DestroyImmediate(animators[0]);
+        
         this.GetComponent<Transform>().position = SpawnPosition.position;
         animator = this.AddComponent<Animator>();
         animator.runtimeAnimatorController = CData.CharAnimatorController;
         animator.avatar = avatar;
         animator.enabled = true;
+        
     }
     
     public void AssignCharData(CharacterData characterData)
