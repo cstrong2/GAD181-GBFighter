@@ -25,6 +25,8 @@ namespace Player
             Gizmos.DrawCube(collider.transform.position, collider.size);
         }
 
+        
+
         public void ActivateAttackTrigger()
         {
             
