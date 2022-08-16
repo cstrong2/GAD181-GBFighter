@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Interfaces;
+using System.Linq;
 using UnityEngine;
 
 namespace Player
@@ -15,6 +16,8 @@ namespace Player
             collider = toAttachTo.gameObject.AddComponent<BoxCollider>();
             collider.size = colliderSize;
             collider.isTrigger = true;
+            collider.enabled = false;
+
         }
 
         private void OnDrawGizmos()
@@ -29,13 +32,22 @@ namespace Player
 
         public void ActivateAttackTrigger()
         {
-            
+            collider.enabled = true;
         }
         
         public void DeactivateAttackTrigger()
         {
-            
+            collider.enabled = false;
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            var otherDamage = other.gameObject.GetComponent<IDamageable>();
+            if (otherDamage != null)
+            {
+                otherDamage.DoDamage(-10);
+            }
+        }
+
     }
 }
