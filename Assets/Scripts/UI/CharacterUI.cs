@@ -2,7 +2,6 @@
 using Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.tvOS;
 using UnityEngine.UI;
 
 namespace UI

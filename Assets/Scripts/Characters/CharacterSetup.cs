@@ -98,7 +98,6 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         
         this.GetComponent<Transform>().position = SpawnPosition.position;
         animator = this.AddComponent<Animator>();
-        animator.runtimeAnimatorController = CData.CharAnimatorController;
         animator.avatar = avatar;
         animator.enabled = true;
         playerIndicator.SetActive(true);
