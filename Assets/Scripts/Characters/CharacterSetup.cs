@@ -6,11 +6,11 @@ using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class CharacterSetup : MonoBehaviour, IDamageable
 {
     [Header("Character Stats")] 
-    public string charInstanceName;
     public int maxHealth;
     [SerializeField] private int currentHealth;
     
@@ -21,9 +21,21 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     [SerializeField] private Avatar avatar;
     
     [Header("Player Information")] 
+    public string charInstanceName;
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
     [SerializeField] public PlayerInput playerInput;
+
+    public int CurrentHealth
+    {
+        get => currentHealth;
+        set
+        {
+            currentHealth = value;
+            if (currentHealth <= 0)
+                GameEvents.OnPlayerDiedEvent?.Invoke(playerID);
+        }
+    }
 
     public CharacterData CData
     {
@@ -85,7 +97,7 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         
         armature = CData.CharPrefab;
         maxHealth = CData.MaxHealth;
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
     
     private void AssignPlayerData(PlayerData playerData)
@@ -96,9 +108,9 @@ public class CharacterSetup : MonoBehaviour, IDamageable
 
     public void DoDamage(int damageAmount)
     {
-        int alteredHealth = this.currentHealth += damageAmount;
-        this.currentHealth = alteredHealth >= maxHealth ? maxHealth : alteredHealth;
-        float healthAsPercent = (float)this.currentHealth / (float)maxHealth;
+        int alteredHealth = this.CurrentHealth += damageAmount;
+        this.CurrentHealth = alteredHealth >= maxHealth ? maxHealth : alteredHealth;
+        float healthAsPercent = (float)this.CurrentHealth / (float)maxHealth;
         GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
     }
     
