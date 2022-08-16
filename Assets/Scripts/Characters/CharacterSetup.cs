@@ -2,6 +2,7 @@ using System.Linq;
 using Attributes;
 using Events;
 using Interfaces;
+using Player;
 using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
     [SerializeField] public PlayerInput playerInput;
+    private Attack attack;
 
     public int CurrentHealth
     {
@@ -76,7 +78,6 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     {
         GameEvents.OnFightSceneHasLoadedEvent -= SpawnCharacter;
         GameEvents.OnGameOverUIEvent -= Clear;
-        Clear();
     }
 
     private void SpawnCharacter()
@@ -101,6 +102,7 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         animator.avatar = avatar;
         animator.enabled = true;
         playerIndicator.SetActive(true);
+        attack = gameObject.AddComponent<Attack>();
     }
     
     public void AssignCharData(CharacterData characterData)
@@ -122,24 +124,25 @@ public class CharacterSetup : MonoBehaviour, IDamageable
 
     public void DoDamage(int damageAmount)
     {
-        int alteredHealth = this.CurrentHealth += damageAmount;
-        this.CurrentHealth = alteredHealth >= maxHealth ? maxHealth : alteredHealth;
+        CurrentHealth -= damageAmount;
+        Debug.Log(playerID +" took damage of" + damageAmount);
         float healthAsPercent = (float)this.CurrentHealth / (float)maxHealth;
         GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
     }
     
-    //    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
-    private void Update()
-    {
-        if (playerID == 0 && Keyboard.current.qKey.wasPressedThisFrame)
-        {
-            DoDamage(-20);
-        }
-    }
+//    //    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
+//    private void Update()
+//    {
+//        if (playerID == 0 && Keyboard.current.qKey.wasPressedThisFrame)
+//        {
+//            DoDamage(-20);
+//        }
+//    }
 
     void Clear()
     {
         Destroy(_armatureInstance);
         playerIndicator.SetActive(false);
+        Destroy(attack);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Player
@@ -7,47 +8,47 @@ namespace Player
     public class Attack : MonoBehaviour
     {
         [SerializeField] private Transform toAttachTo;
-        private BoxCollider collider = new();
-        [SerializeField] private Vector3 colliderSize = new Vector3(0.3f, 0.3f, 0.3f);
+        private BoxCollider _col = new();
+        [SerializeField] private Vector3 colliderSize = new (0.3f, 0.3f, 0.3f);
 
+        public Transform ToAttachTo
+        {
+            get => toAttachTo;
+            set => toAttachTo = value;
+        }
+        
         private void OnEnable()
         {
             toAttachTo = GetComponentsInChildren<Transform>().ToList().Find(n => n.gameObject.name.Contains("LeftHand"));
-            collider = toAttachTo.gameObject.AddComponent<BoxCollider>();
-            collider.size = colliderSize;
-            collider.isTrigger = true;
-            collider.enabled = false;
-
+            _col = toAttachTo.gameObject.AddComponent<BoxCollider>();
+            _col.AddComponent<AttackCollider>();
+            _col.size = colliderSize;
+            _col.isTrigger = true;
+            _col.enabled = false;
         }
 
         private void OnDrawGizmos()
         {
-            if (collider == null)
+            if (_col == null)
                 return;
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(collider.transform.position, collider.size);
+            Gizmos.DrawCube(_col.transform.position, _col.size);
         }
-
-        
 
         public void ActivateAttackTrigger()
         {
-            collider.enabled = true;
+            if (_col == null)
+                return;
+            _col.enabled = true;
+            Debug.Log("We done a punch");
         }
         
         public void DeactivateAttackTrigger()
         {
-            collider.enabled = false;
+            if (_col == null)
+                return;
+            _col.enabled = false;
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            var otherDamage = other.gameObject.GetComponent<IDamageable>();
-            if (otherDamage != null)
-            {
-                otherDamage.DoDamage(-10);
-            }
-        }
-
+        
     }
 }

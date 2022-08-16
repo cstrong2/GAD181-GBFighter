@@ -33786,14 +33786,14 @@ AnimationClip:
   - time: 0.46666667
     functionName: ActivateAttackTrigger
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: d2b83ca52ed24addb23720d8810aff40, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.7
     functionName: DeactivateAttackTrigger
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: d2b83ca52ed24addb23720d8810aff40, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

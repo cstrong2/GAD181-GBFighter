@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInstanceData: {fileID: 0}
   playerInput: {fileID: -8720767180056125600, guid: 757e398eceaa5a743a391f9bdf93f019, type: 3}
+  uiInputModule: {fileID: 0}
 --- !u!114 &734055235407361528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,14 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c882b551f6c1c4bb8295c1c5c832d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charInstanceName: 
   maxHealth: 0
   currentHealth: 0
   cData: {fileID: 11400000, guid: 0064d3c0b36fc82469911d528d8c7e1e, type: 2}
   armature: {fileID: 0}
-  animatorController: {fileID: 0}
   animator: {fileID: 0}
   avatar: {fileID: 0}
+  playerIndicator: {fileID: 0}
+  charInstanceName: 
   pData: {fileID: 0}
   playerID: 0
   playerInput: {fileID: 0}
