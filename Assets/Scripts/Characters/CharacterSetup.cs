@@ -6,7 +6,6 @@ using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class CharacterSetup : MonoBehaviour, IDamageable
 {
@@ -17,8 +16,10 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     [Header("Character Rig and Model")]
     [SerializeField] private CharacterData cData;
     [SerializeField][ReadOnly] private GameObject armature;
+    GameObject _armatureInstance;
     [SerializeField] private Animator animator;
     [SerializeField] private Avatar avatar;
+    [SerializeField] private GameObject playerIndicator;
     
     [Header("Player Information")] 
     public string charInstanceName;
@@ -32,8 +33,12 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         set
         {
             currentHealth = value;
-            if (currentHealth <= 0)
+            Debug.Log($"currentHealth was altered and is now {CurrentHealth}");
+            if (CurrentHealth <= 0)
+            {
+                Debug.Log($"currentHealth hit {CurrentHealth} and this player {playerID}");
                 GameEvents.OnPlayerDiedEvent?.Invoke(playerID);
+            }
         }
     }
 
@@ -64,29 +69,38 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         GameEvents.OnFightSceneHasLoadedEvent += SpawnCharacter;
+        GameEvents.OnGameOverUIEvent += Clear;
     }
     
     private void OnDisable()
     {
         GameEvents.OnFightSceneHasLoadedEvent -= SpawnCharacter;
+        GameEvents.OnGameOverUIEvent -= Clear;
+        Clear();
     }
 
     private void SpawnCharacter()
     {
-        var armatureInstance = Instantiate(armature, transform);
-        var animators = armatureInstance.GetComponentsInChildren<Animator>().ToList();
-        Debug.Log(animators[0]);
-        for (int i = 0; i < animators.Count; i++)
-        {
-            if (i >= 1)
-                DestroyImmediate(animators[i]);
-        }
+        _armatureInstance = Instantiate(armature, transform);
+        var animators = _armatureInstance.GetComponentsInChildren<Animator>().ToList();
+//        Debug.Log(animators[0]);
+
+        if(animators.Count > 0)
+            for (int i = 0; i < animators.Count; i++)
+            {
+                if (i >= 1)
+                {
+                    DestroyImmediate(animators[i]);
+                    break;
+                }
+            }
         
         this.GetComponent<Transform>().position = SpawnPosition.position;
         animator = this.AddComponent<Animator>();
         animator.runtimeAnimatorController = CData.CharAnimatorController;
         animator.avatar = avatar;
         animator.enabled = true;
+        playerIndicator.SetActive(true);
     }
     
     public void AssignCharData(CharacterData characterData)
@@ -114,12 +128,18 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
     }
     
-    ////    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
-//    private void Update()
-//    {
-//        if (Keyboard.current.qKey.wasPressedThisFrame)
-//        {
-//            DoDamage(-20);
-//        }
-//    }
+    //    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
+    private void Update()
+    {
+        if (playerID == 0 && Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            DoDamage(-20);
+        }
+    }
+
+    void Clear()
+    {
+        Destroy(_armatureInstance);
+        playerIndicator.SetActive(false);
+    }
 }

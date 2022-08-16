@@ -6,7 +6,7 @@ namespace Player
     public class Attack : MonoBehaviour
     {
         [SerializeField] private Transform toAttachTo;
-        private BoxCollider collider;
+        private BoxCollider collider = new();
         [SerializeField] private Vector3 colliderSize = new Vector3(0.3f, 0.3f, 0.3f);
 
         private void OnEnable()

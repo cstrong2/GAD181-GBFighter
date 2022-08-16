@@ -66,15 +66,19 @@ namespace Core
             GameEvents.OnFightSceneLoadingEvent += DoFightSetup;
             GameEvents.OnFightSceneHasLoadedEvent += SpawnCombatants;
             GameEvents.OnPlayerSelectedCharacterEvent += SetCharData;
+            GameEvents.OnPlayerWonEvent += DeactivateCombatants;
 
         }
         
+
         private void OnDisable()
         {
             inputManager.onPlayerJoined -= AddPlayer;
             GameEvents.OnFightSceneLoadingEvent -= DoFightSetup;
             GameEvents.OnFightSceneHasLoadedEvent -= SpawnCombatants;
             GameEvents.OnPlayerSelectedCharacterEvent -= SetCharData;
+            GameEvents.OnPlayerWonEvent -= DeactivateCombatants;
+
         }
 
         private void DoFightSetup()
@@ -149,7 +153,7 @@ namespace Core
             {
                 i.SwitchCurrentActionMap(PlayerMap);
                 i.notificationBehavior = PlayerNotifications.SendMessages;
-                Debug.Log(i.currentActionMap);
+//                Debug.Log(i.currentActionMap);
             }
         }
         
@@ -200,6 +204,15 @@ namespace Core
 //            var character = GameManager.Instance.GetCharByID(charid);
 //            players.Find(p => p.playerInstanceData.PlayerID == playerid).GetComponent<CharacterSetup>().CData =
 //                character;
+        }
+        
+        private void DeactivateCombatants(int id)
+        {
+            foreach (var playerInstance in Players)
+            {
+                playerInstance.GetComponent<TopDownController>().enabled = false;
+                playerInstance.GetComponent<CharacterController>().enabled = false;
+            }
         }
     }
 }

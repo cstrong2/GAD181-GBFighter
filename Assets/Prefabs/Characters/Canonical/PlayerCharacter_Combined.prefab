@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 927980893815502188}
   - component: {fileID: 955420444358447740}
   m_Layer: 7
-  m_Name: Plane
+  m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6013147953545700428
 Transform:
   m_ObjectHideFlags: 0
@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 6806063684289420852}
+    - target: {fileID: 3306641659796007813, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: playerIndicator
+      value: 
+      objectReference: {fileID: 8606527499829216675}
     - target: {fileID: 4238992493842493537, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: MoveSpeed
       value: 2

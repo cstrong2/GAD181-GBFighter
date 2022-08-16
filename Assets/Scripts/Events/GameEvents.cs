@@ -20,6 +20,8 @@ namespace Events
         public delegate void PlayerDied(int playerID);
 
         public delegate void PlayerWon(int id);
+
+        public delegate void GameOver();
         
         public static NewPlayerJoined OnNewPlayerJoinedEvent;
         public static CharacterSelect OnPlayerSelectCharacter;
@@ -33,5 +35,6 @@ namespace Events
         public static SendCharacterDamaged OnCharacterDamagedEvent;
         public static PlayerDied OnPlayerDiedEvent;
         public static PlayerWon OnPlayerWonEvent;
+        public static GameOver OnGameOverUIEvent;
     }
 }
