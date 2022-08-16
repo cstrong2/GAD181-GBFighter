@@ -17,6 +17,9 @@ namespace Events
         public delegate void PlayerClicked(int playerId);
         public delegate void SetUpPlayerUI(List<PlayerInstance> players);
         public delegate void SendCharacterDamaged(int playerID, float normalisedValue);
+        public delegate void PlayerDied(int playerID);
+
+        public delegate void PlayerWon(int id);
         
         public static NewPlayerJoined OnNewPlayerJoinedEvent;
         public static CharacterSelect OnPlayerSelectCharacter;
@@ -28,6 +31,7 @@ namespace Events
         public static PlayerClicked OnPlayerClickedEvent;
         public static SetUpPlayerUI OnUISetUpEvent;
         public static SendCharacterDamaged OnCharacterDamagedEvent;
-
+        public static PlayerDied OnPlayerDiedEvent;
+        public static PlayerWon OnPlayerWonEvent;
     }
 }

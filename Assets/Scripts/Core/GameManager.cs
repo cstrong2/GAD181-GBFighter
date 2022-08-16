@@ -11,7 +11,7 @@ namespace Core
         public static GameManager Instance = null;
 
         [SerializeField] private GameData gameData;
-
+        [SerializeField] private FightState fightState;
         public GameData GameData
         {
             get => gameData;
@@ -51,6 +51,15 @@ namespace Core
         {
             SceneManager.LoadScene(fightScene);
             GameEvents.OnFightSceneLoadingEvent?.Invoke();
+            
+            if(fightState != null)
+                DestroyImmediate(fightState);
+            
+            fightState = ScriptableObject.CreateInstance<FightState>();
+            foreach (var p in PlayersManager.Instance.Players)
+            { 
+                fightState.PlayersDead.Add(false);
+            }
         }
 
         void FightSceneHasLoaded(Scene scene, LoadSceneMode loadSceneMode)
@@ -65,6 +74,11 @@ namespace Core
         {
             SceneManager.LoadScene(characterSelectScene);
         }
+        
+        // foreach player, we need to add a bool to the list in the order of the players.
+        // When a player hp is 0, we need to send an event that passes the ID of the player
+        // and we set the bool to true for that id in the list.
+        // we then do a linq except of true, and if that new list only has one member then the game is over.
         
     }
 }
