@@ -10,10 +10,10 @@ using UnityEngine.InputSystem;
 
 public class CharacterSetup : MonoBehaviour, IDamageable
 {
-    [Header("Character Stats")] 
+    [Header("Character Stats")]
     public int maxHealth;
     [SerializeField] private int currentHealth;
-    
+
     [Header("Character Rig and Model")]
     [SerializeField] private CharacterData cData;
     [SerializeField][ReadOnly] private GameObject armature;
@@ -21,8 +21,8 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     [SerializeField] private Animator animator;
     [SerializeField] private Avatar avatar;
     [SerializeField] private GameObject playerIndicator;
-    
-    [Header("Player Information")] 
+
+    [Header("Player Information")]
     public string charInstanceName;
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
@@ -54,7 +54,8 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         }
     }
 
-    public PlayerData PData {
+    public PlayerData PData
+    {
         get => pData;
         set
         {
@@ -62,18 +63,18 @@ public class CharacterSetup : MonoBehaviour, IDamageable
             AssignPlayerData(PData);
         }
     }
-    
+
     public int PlayerID { get => playerID; set => playerID = value; }
 
     public Transform SpawnPosition { get; set; }
-    
+
 
     private void OnEnable()
     {
         GameEvents.OnFightSceneHasLoadedEvent += SpawnCharacter;
         GameEvents.OnGameOverUIEvent += Clear;
     }
-    
+
     private void OnDisable()
     {
         GameEvents.OnFightSceneHasLoadedEvent -= SpawnCharacter;
@@ -84,9 +85,9 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     {
         _armatureInstance = Instantiate(armature, transform);
         var animators = _armatureInstance.GetComponentsInChildren<Animator>().ToList();
-//        Debug.Log(animators[0]);
+        Debug.Log(animators.Count + " animators");
 
-        if(animators.Count > 0)
+        if (animators.Count > 0)
             for (int i = 0; i < animators.Count; i++)
             {
                 if (i >= 1)
@@ -95,26 +96,26 @@ public class CharacterSetup : MonoBehaviour, IDamageable
                     break;
                 }
             }
-        
+
         this.GetComponent<Transform>().position = SpawnPosition.position;
-        animator = this.AddComponent<Animator>();
+        animator = this.GetComponent<Animator>();
         animator.avatar = avatar;
         animator.enabled = true;
         playerIndicator.SetActive(true);
         attack = gameObject.AddComponent<Attack>();
     }
-    
+
     public void AssignCharData(CharacterData characterData)
     {
         avatar = CData.CharAvatar;
-//        animator = GetComponentInChildren<Animator>();
-//        animator.enabled = false;
-        
+        //        animator = GetComponentInChildren<Animator>();
+        //        animator.enabled = false;
+
         armature = CData.CharPrefab;
         maxHealth = CData.MaxHealth;
         CurrentHealth = maxHealth;
     }
-    
+
     private void AssignPlayerData(PlayerData playerData)
     {
         PlayerID = playerData.PlayerID;
@@ -124,19 +125,19 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     public void DoDamage(int damageAmount)
     {
         CurrentHealth -= damageAmount;
-        Debug.Log(playerID +" took damage of" + damageAmount);
+        Debug.Log(playerID + " took damage of" + damageAmount);
         float healthAsPercent = (float)this.CurrentHealth / (float)maxHealth;
         GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
     }
-    
-//    //    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
-//    private void Update()
-//    {
-//        if (playerID == 0 && Keyboard.current.qKey.wasPressedThisFrame)
-//        {
-//            DoDamage(-20);
-//        }
-//    }
+
+    //    //    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
+    //    private void Update()
+    //    {
+    //        if (playerID == 0 && Keyboard.current.qKey.wasPressedThisFrame)
+    //        {
+    //            DoDamage(-20);
+    //        }
+    //    }
 
     void Clear()
     {

@@ -88,7 +88,7 @@ namespace UI
             } else if (direction.x > .5f)
             {
                 pInstance.CurrentCharacterID += 1;
-                if (pInstance.CurrentCharacterID > GameManager.Instance.GameData.characterDB.charactersList.Count) pInstance.CurrentCharacterID = GameManager.Instance.GameData.characterDB.charactersList.Count;
+                if (pInstance.CurrentCharacterID > GameManager.Instance.GameData.characterDB.charactersList.Count + 1) pInstance.CurrentCharacterID = GameManager.Instance.GameData.characterDB.charactersList.Count + 1;
 //                Debug.Log("Right");
             }  
             parentUI.SetPlayerImage(pInstance.CurrentCharacterID, pInstance.PlayerID);
