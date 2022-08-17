@@ -19,7 +19,7 @@ namespace Player
         
         private void OnEnable()
         {
-            toAttachTo = GetComponentsInChildren<Transform>().ToList().Find(n => n.gameObject.name.Contains("LeftHand"));
+            toAttachTo = GetComponentsInChildren<Transform>().ToList().Find(n => n.gameObject.name.Contains("Left Hand") || n.gameObject.name.Contains("Left_Hand") || n.gameObject.name.Contains("LeftHand"));
             _col = toAttachTo.gameObject.AddComponent<BoxCollider>();
             _col.AddComponent<AttackCollider>();
             _col.size = colliderSize;

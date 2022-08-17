@@ -90,7 +90,7 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         if (animators.Count > 0)
             for (int i = 0; i < animators.Count; i++)
             {
-                if (i >= 1)
+                if (i >= 0)
                 {
                     DestroyImmediate(animators[i]);
                     break;

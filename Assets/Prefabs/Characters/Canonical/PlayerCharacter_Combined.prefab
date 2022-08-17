@@ -175,30 +175,6 @@ PrefabInstance:
       propertyPath: GroundedOffset
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: 44affff02d9456544963583cfa4afabb, type: 3}
-    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 40db3173a05ae3242b1c182a09b0a183, type: 2}
-    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
-      propertyPath: m_UpdateMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
-      propertyPath: m_CullingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4238992493842493566, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6201881189607568597, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: cursor
       value: 
