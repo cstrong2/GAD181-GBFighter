@@ -152,6 +152,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3306641659796007813, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: painSounds
+      value: 
+      objectReference: {fileID: 11400000, guid: 480a2fb8888b11f4f8fc057679bade5b, type: 2}
+    - target: {fileID: 3306641659796007813, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 6806063684289420852}

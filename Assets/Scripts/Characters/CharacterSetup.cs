@@ -30,6 +30,7 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     [Header("Audio")] 
     [SerializeField] private AudioClipList hitSounds;
     [SerializeField] private AudioClipList attackSounds;
+    [SerializeField] private AudioClipList painSounds;
     private Attack attack;
 
     public int CurrentHealth
@@ -144,6 +145,7 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         Debug.Log(playerID + " took damage of" + damageAmount);
         float healthAsPercent = (float)this.CurrentHealth / (float)maxHealth;
         GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
+        GameEvents.OnAudioCollisionEvent?.Invoke(painSounds.GetRandomClip());
     }
 
     //    //    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
