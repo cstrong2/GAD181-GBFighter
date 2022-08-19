@@ -125,9 +125,6 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     public void AssignCharData(CharacterData characterData)
     {
         avatar = CData.CharAvatar;
-        //        animator = GetComponentInChildren<Animator>();
-        //        animator.enabled = false;
-
         armature = CData.CharPrefab;
         maxHealth = CData.MaxHealth;
         CurrentHealth = maxHealth;
@@ -147,15 +144,6 @@ public class CharacterSetup : MonoBehaviour, IDamageable
         GameEvents.OnCharacterDamagedEvent?.Invoke(playerID, healthAsPercent);
         GameEvents.OnAudioCollisionEvent?.Invoke(painSounds.GetRandomClip());
     }
-
-    //    //    TODO: This Update is a TESTING setup only. DELETE IT. This will run on all characters in the scene for testing purposes.
-    //    private void Update()
-    //    {
-    //        if (playerID == 0 && Keyboard.current.qKey.wasPressedThisFrame)
-    //        {
-    //            DoDamage(-20);
-    //        }
-    //    }
 
     void Clear()
     {
