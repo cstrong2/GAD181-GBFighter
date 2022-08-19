@@ -4,7 +4,6 @@ using Events;
 using Interfaces;
 using Player;
 using ScriptableObjects;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +26,10 @@ public class CharacterSetup : MonoBehaviour, IDamageable
     [SerializeField] private PlayerData pData;
     [SerializeField] private int playerID;
     [SerializeField] public PlayerInput playerInput;
+
+    [Header("Audio")] 
+    [SerializeField] private AudioClipList hitSounds;
+    [SerializeField] private AudioClipList attackSounds;
     private Attack attack;
 
     public int CurrentHealth
@@ -98,11 +101,24 @@ public class CharacterSetup : MonoBehaviour, IDamageable
             }
 
         this.GetComponent<Transform>().position = SpawnPosition.position;
+        
         animator = this.GetComponent<Animator>();
-        animator.avatar = avatar;
-        animator.enabled = true;
+        
+        if(animator)
+        {
+            animator.avatar = avatar;
+            animator.enabled = true;
+        }
+        
         playerIndicator.SetActive(true);
+        
         attack = gameObject.AddComponent<Attack>();
+        
+        if(attack)
+        {
+            attack.attackSounds = attackSounds;
+            attack.hitSounds = hitSounds;
+        }
     }
 
     public void AssignCharData(CharacterData characterData)

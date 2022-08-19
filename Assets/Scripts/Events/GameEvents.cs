@@ -18,10 +18,10 @@ namespace Events
         public delegate void SetUpPlayerUI(List<PlayerInstance> players);
         public delegate void SendCharacterDamaged(int playerID, float normalisedValue);
         public delegate void PlayerDied(int playerID);
-
         public delegate void PlayerWon(int id);
-
         public delegate void GameOver();
+        public delegate void AudioCollision(AudioClip clipToPlay);
+        public delegate void AttackLanded();
         
         public static NewPlayerJoined OnNewPlayerJoinedEvent;
         public static CharacterSelect OnPlayerSelectCharacter;
@@ -36,5 +36,7 @@ namespace Events
         public static PlayerDied OnPlayerDiedEvent;
         public static PlayerWon OnPlayerWonEvent;
         public static GameOver OnGameOverUIEvent;
+        public static AudioCollision OnAudioCollisionEvent;
+        public static AttackLanded OnAttackLandedEvent;
     }
 }

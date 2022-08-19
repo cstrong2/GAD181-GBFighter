@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f8977421b0a4a40a5b5c88c23a6993, type: 3}
+  m_Name: Miss_AudioClips
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: 3e6300b731c182842a7a794db7dd8c0e, type: 3}
+  - {fileID: 8300000, guid: b75f975bb7aa0c44386ad0f4e8f5c6f2, type: 3}
+  - {fileID: 8300000, guid: 0fdaed98b8128734fa9507ead51a8e44, type: 3}
+  - {fileID: 8300000, guid: 43987faebd267bb43a6533688181b7c2, type: 3}
+  - {fileID: 8300000, guid: 5cab94f6e93d7c94689730288cdcc2e9, type: 3}
+  - {fileID: 8300000, guid: 93f8bcc976e5d2b478a70fca30cfc6fa, type: 3}
+  - {fileID: 8300000, guid: 6f67ca4c39ab35b48864d172e1bbec60, type: 3}
+  - {fileID: 8300000, guid: f00b63efc5fdfe74992556e42c34bf16, type: 3}
+  - {fileID: 8300000, guid: 8eec588fe0c7fe6499a8612da6b0b01d, type: 3}

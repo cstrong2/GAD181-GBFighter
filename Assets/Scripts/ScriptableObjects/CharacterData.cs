@@ -40,7 +40,5 @@ namespace ScriptableObjects
         
         #endregion
         
-        
-
     }
 }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f8977421b0a4a40a5b5c88c23a6993, type: 3}
+  m_Name: Pain_AudioClips
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: e4a4dd07e54a71c4da09734a44a7b66d, type: 3}
+  - {fileID: 8300000, guid: 1987c6967e28e534582d09d2afb05717, type: 3}
+  - {fileID: 8300000, guid: 272b38d2d2cd4c842887aaabbc712e49, type: 3}
+  - {fileID: 8300000, guid: df54900e4349eaa4fa21cc37eff1a5bd, type: 3}
+  - {fileID: 8300000, guid: 764dd8ed4686605439bf1b3744094dc3, type: 3}
+  - {fileID: 8300000, guid: aaebf3c423c6dcf43994841339d2f74c, type: 3}
+  - {fileID: 8300000, guid: 7dd0dbc267b6cb9469214d71855e1b4e, type: 3}
+  - {fileID: 8300000, guid: bb7c8f6e7bcbbfd49802b0579239eb51, type: 3}
+  - {fileID: 8300000, guid: 0f7e5e04a51db5d429d8156f36e4aec0, type: 3}
+  - {fileID: 8300000, guid: b4dce0a2954637344a7b69eb40085ec0, type: 3}
+  - {fileID: 8300000, guid: 88f86a50a47379c42ab2e62bb9a21f31, type: 3}
+  - {fileID: 8300000, guid: 3bcd3c135375132409164dd2ef8a4830, type: 3}
+  - {fileID: 8300000, guid: a6c2bccd02dff4d4fa9d872e95d5eae9, type: 3}
+  - {fileID: 8300000, guid: 453cfb8139889d642bf1214973563a3a, type: 3}
+  - {fileID: 8300000, guid: 9a0337f8ceab32241a9be313c98ce5a8, type: 3}
