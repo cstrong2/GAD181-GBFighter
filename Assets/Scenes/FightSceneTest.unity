@@ -879,6 +879,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 534962062}
+  lightShake:
+    duration: 0.02
+    strength: 0.2
+    vibrato: 1
+    randomness: 45
+  heavyShake:
+    duration: 0.2
+    strength: 0.2
+    vibrato: 1
+    randomness: 45
 --- !u!4 &1471400739
 Transform:
   m_ObjectHideFlags: 0

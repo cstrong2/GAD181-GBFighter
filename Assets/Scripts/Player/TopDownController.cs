@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using Events;
+using Player;
 using StarterAssets;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
@@ -283,6 +284,7 @@ using UnityEngine.InputSystem;
                 if (_fallTimeoutDelta >= 0.0f)
                 {
                     _fallTimeoutDelta -= Time.deltaTime;
+
                 }
                 else
                 {
@@ -342,6 +344,7 @@ using UnityEngine.InputSystem;
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                GameEvents.OnJumpLandedEvent?.Invoke();
             }
         }
     }

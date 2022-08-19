@@ -1,12 +1,8 @@
-﻿using System;
-using Interfaces;
-using System.Linq;
-using Audio;
+﻿using System.Linq;
 using Events;
 using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -16,7 +12,7 @@ namespace Player
         [SerializeField] public AudioClipList attackSounds;
         [SerializeField] private Transform toAttachTo;
         private BoxCollider _col = new();
-        [SerializeField] private Vector3 colliderSize = new (0.3f, 0.3f, 0.3f);
+        [SerializeField] private Vector3 colliderSize = new (0.5f, 0.5f, 0.5f);
 
         public Transform ToAttachTo
         {
