@@ -1,10 +1,7 @@
 ﻿using Events;
 using ScriptableObjects;
-using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -12,21 +9,8 @@ namespace Player
     {
         public PlayerData playerInstanceData;
         public PlayerInput playerInput;
-        public InputSystemUIInputModule uiInputModule;
         private const string Click = "Click";
-//        public GamepadCursor gamepadCursor;
-//
-//        private const string Gamepad = "Gamepad";
 
-//        private void Awake()
-//        {
-//            SetCursorState();
-//        }
-
-//        private void Update()
-//        {
-//            SetCursorState();
-//        }
 
         private void OnEnable()
         {

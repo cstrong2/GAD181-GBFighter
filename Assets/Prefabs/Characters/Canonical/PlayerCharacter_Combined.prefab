@@ -128,6 +128,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 734055235407361528, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 734055235407361528, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: m_DefaultActionMap
       value: UI
       objectReference: {fileID: 0}
@@ -241,6 +245,10 @@ PrefabInstance:
       objectReference: {fileID: 6806063684289420852}
     - target: {fileID: 6201881189607568597, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: gamepadCursor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201881189607568597, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: uiInputModule
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7455728213420601522, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}

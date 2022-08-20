@@ -23,7 +23,8 @@ namespace Core
         [SerializeField] private List<PlayerInput> playerInputs;
         [SerializeField] private List<Transform> spawnPositions;
         [SerializeField] [ReadOnly] private int maxPlayers;
-        
+
+        [SerializeField] private GameObject playerFightPrefab;
 
         private const string PlayerMap = "Player", UIMap = "UI";
 
@@ -161,14 +162,16 @@ namespace Core
         {
             GameEvents.OnUISetUpEvent?.Invoke(players);
             GetSpawnLocations();
-            foreach (var p in players)
+            foreach (var p in playerInputs)
             {
-                var cs = p.GetComponent<CharacterSetup>();
-                cs.playerInput = p.playerInput;
+                var playerInstance = PlayerInput.Instantiate(playerFightPrefab, p.playerIndex, controlScheme: p.currentControlScheme);
+                var cs = playerInstance.GetComponent<CharacterSetup>();
+                SetUpPlayerData(players[p.playerIndex], p);
+                cs.playerInput = p;
                 cs.transform.parent = p.transform;
-                cs.SpawnPosition = spawnPositions[p.playerInstanceData.PlayerID];
+                cs.SpawnPosition = spawnPositions[p.playerIndex];
                 
-                cs.CData = gameData.characterDB.GetCharByID(p.playerInstanceData.CurrentCharacterID);
+                cs.CData = gameData.characterDB.GetCharByID(players[p.playerIndex].playerInstanceData.CurrentCharacterID);
                 Debug.Log(p + " has been iterated on");
 
                 p.GetComponent<TopDownController>().enabled = true;
@@ -194,8 +197,8 @@ namespace Core
             playerInstance.name = pData.PlayerLabel;
             playerInstance.playerInstanceData = pData;
             playerInstance.transform.parent = this.transform;
-            var cs = playerInstance.GetComponent<CharacterSetup>();
-            cs.PData = pData;
+//            var cs = playerInstance.GetComponent<CharacterSetup>();
+//            cs.PData = pData;
         }
         
         private void SetCharData(int charid, int playerid)
