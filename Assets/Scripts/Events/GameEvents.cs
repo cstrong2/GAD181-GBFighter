@@ -14,6 +14,7 @@ namespace Events
         public delegate void FightSceneLoading();
         public delegate void FightSceneHasLoaded();
         public delegate void AllPlayersReady();
+        public delegate void AllPlayersSelectedCharacters();
         public delegate void PlayerClicked(int playerId);
         public delegate void SetUpPlayerUI(List<PlayerInstance> players);
         public delegate void SendCharacterDamaged(int playerID, float normalisedValue);
@@ -28,6 +29,7 @@ namespace Events
         public static CharacterSelect OnPlayerSelectCharacter;
         public static CharacterSelect OnPlayerSelectedCharacterEvent;
         public static SendMaxPlayers OnLoadGameDataEvent;
+        public static AllPlayersSelectedCharacters OnAllPlayersHaveSelectedCharactersEvent;
         public static AllPlayersReady OnAllPlayersReadyEvent;
         public static FightSceneLoading OnFightSceneLoadingEvent;
         public static FightSceneHasLoaded OnFightSceneHasLoadedEvent;

@@ -1,13 +1,15 @@
 ﻿using Attributes;
 using Events;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class CharacterUIButton : MonoBehaviour
+    public class CharacterUISelectRandom : MonoBehaviour
     {
+        [SerializeField] private CharacterDatabase charDB;
         [SerializeField] public int charID;
         [SerializeField] private Button button;
         [SerializeField] [ReadOnly] private int pIndex;
@@ -29,8 +31,9 @@ namespace UI
 
         void SendCharacterSelection()
         {
+            int _characterID = charDB.GetRandomCharacterID();
             Debug.Log("SendCharacterSelection ran");
-            GameEvents.OnPlayerSelectCharacter?.Invoke(charID, pIndex);
+            GameEvents.OnPlayerSelectCharacter?.Invoke(_characterID, pIndex);
         }
     }
 }

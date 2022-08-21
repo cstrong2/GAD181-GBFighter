@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Events;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +12,34 @@ namespace UI
         [SerializeField] private GridLayoutGroup grid;
         [SerializeField] private GameObject characterUIButton;
         [SerializeField] List<CharacterUIButton> characterUIList = null;
+        [SerializeField] private Button readyButton;
         private void Start()
         {
             grid = GetComponentInChildren<GridLayoutGroup>();
             GenerateCharacterButtonsGrid();
+        }
+
+        private void OnEnable()
+        {
+            GameEvents.OnAllPlayersHaveSelectedCharactersEvent += EnableReadyButton;
+            readyButton.onClick.AddListener(ReadyButtonPressed);
+
+        }
+        
+        private void OnDisable()
+        {
+            GameEvents.OnAllPlayersHaveSelectedCharactersEvent += EnableReadyButton;
+            readyButton.onClick.RemoveListener(ReadyButtonPressed);
+        }
+
+        private void EnableReadyButton()
+        {
+            readyButton.interactable = true;
+        }
+
+        void ReadyButtonPressed()
+        {
+            GameEvents.OnAllPlayersReadyEvent?.Invoke();
         }
 
         void GenerateCharacterButtonsGrid()

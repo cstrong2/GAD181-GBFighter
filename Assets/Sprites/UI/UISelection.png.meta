@@ -178,6 +178,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UISelection_Empty
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df96522e69536154ca7c083513c8242a
+      internalID: 2013104466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -190,6 +211,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UISelection_Inactive: -1929604730
+      UISelection_Empty: 2013104466
       UISelection_Selected: -542137914
       UISelection_Hover: -683920935
   spritePackingTag: 
