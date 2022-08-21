@@ -128,8 +128,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 734055235407361528, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 734055235407361528, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: m_DefaultActionMap
-      value: UI
+      value: 6a0f5be4-992c-4c28-a2dd-2d040dbea433
+      objectReference: {fileID: 0}
+    - target: {fileID: 734055235407361528, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Gamepad
       objectReference: {fileID: 0}
     - target: {fileID: 734055235407361528, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: m_NotificationBehavior
@@ -243,6 +251,10 @@ PrefabInstance:
       propertyPath: gamepadCursor
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6201881189607568597, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
+      propertyPath: uiInputModule
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7455728213420601522, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
       propertyPath: m_Actions
       value: 
@@ -311,7 +323,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6201881189607568597, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 20f1563c413aa31469799ffcc1797ea1, type: 3}
 --- !u!4 &4066711323466252744 stripped
 Transform:

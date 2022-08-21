@@ -63,8 +63,8 @@ namespace UI
                 case Toggle.Active : 
                     playerActive.SetActive(true);
                     playerInput = PlayerInput.GetPlayerByIndex(AssignedPlayerID);
-                    var action = playerInput.actions.FindAction("Navigate");
-                    action.performed += TheThing;
+//                    var action = playerInput.actions.FindAction("Navigate");
+//                    action.performed += TheThing;
                     playerInactive.SetActive(false);
                     break;
                 case Toggle.Inactive: 
@@ -74,25 +74,25 @@ namespace UI
             }
         }
         
-        private void TheThing(InputAction.CallbackContext obj)
-        {
-            PlayerInstance player = PlayersManager.Instance.Players[AssignedPlayerID];
-            var pInstance = player.playerInstanceData;
-            var direction = obj.ReadValue<Vector2>();
-            Debug.Log($"PlayerInput is {playerInput.playerIndex} and we are navigating, the phase is {obj.phase} and value is {obj.ReadValue<Vector2>()}");
-            if (direction.x < -.5f)
-            {
-                pInstance.CurrentCharacterID -= 1;
-                if (pInstance.CurrentCharacterID < 0) pInstance.CurrentCharacterID = 0;
-//                Debug.Log("Left");
-            } else if (direction.x > .5f)
-            {
-                pInstance.CurrentCharacterID += 1;
-                if (pInstance.CurrentCharacterID > GameManager.Instance.GameData.characterDB.charactersList.Count + 1) pInstance.CurrentCharacterID = GameManager.Instance.GameData.characterDB.charactersList.Count + 1;
-//                Debug.Log("Right");
-            }  
-            parentUI.SetPlayerImage(pInstance.CurrentCharacterID, pInstance.PlayerID);
-
-        }
+//        private void TheThing(InputAction.CallbackContext obj)
+//        {
+//            PlayerInstance player = PlayersManager.Instance.Players[AssignedPlayerID];
+//            var pInstance = player.playerInstanceData;
+//            var direction = obj.ReadValue<Vector2>();
+//            Debug.Log($"PlayerInput is {playerInput.playerIndex} and we are navigating, the phase is {obj.phase} and value is {obj.ReadValue<Vector2>()}");
+//            if (direction.x < -.5f)
+//            {
+//                pInstance.CurrentCharacterID -= 1;
+//                if (pInstance.CurrentCharacterID < 0) pInstance.CurrentCharacterID = 0;
+////                Debug.Log("Left");
+//            } else if (direction.x > .5f)
+//            {
+//                pInstance.CurrentCharacterID += 1;
+//                if (pInstance.CurrentCharacterID > GameManager.Instance.GameData.characterDB.charactersList.Count + 1) pInstance.CurrentCharacterID = GameManager.Instance.GameData.characterDB.charactersList.Count + 1;
+////                Debug.Log("Right");
+//            }  
+//            parentUI.SetPlayerImage(pInstance.CurrentCharacterID, pInstance.PlayerID);
+//
+//        }
     }
 }

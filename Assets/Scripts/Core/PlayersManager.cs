@@ -5,6 +5,7 @@ using Events;
 using Player;
 using ScriptableObjects;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +24,8 @@ namespace Core
         [SerializeField] private List<PlayerInput> playerInputs;
         [SerializeField] private List<Transform> spawnPositions;
         [SerializeField] [ReadOnly] private int maxPlayers;
-        
+
+        [SerializeField] private GameObject playerFightPrefab;
 
         private const string PlayerMap = "Player", UIMap = "UI";
 
@@ -94,7 +96,7 @@ namespace Core
                 return;
 //            // We need a message to show if max players is reached or something?
 
-            if (playerInputs.Find(p => p == player))
+            if (playerInputs.Find(p => player.playerIndex == p.playerIndex ))
                 return;
 
             PlayerInputs.Add(player);
@@ -161,20 +163,26 @@ namespace Core
         {
             GameEvents.OnUISetUpEvent?.Invoke(players);
             GetSpawnLocations();
-            foreach (var p in players)
+            foreach (var p in playerInputs)
             {
-                var cs = p.GetComponent<CharacterSetup>();
-                cs.playerInput = p.playerInput;
-                cs.transform.parent = p.transform;
-                cs.SpawnPosition = spawnPositions[p.playerInstanceData.PlayerID];
                 
-                cs.CData = gameData.characterDB.GetCharByID(p.playerInstanceData.CurrentCharacterID);
+                var playerInstance = p.GetComponent<PlayerInstance>();
+                var playerGameObject = PlayerInput.Instantiate(playerFightPrefab, p.playerIndex, controlScheme: p.currentControlScheme);
+                var cs = playerGameObject.GetComponent<CharacterSetup>();
+                cs.PData = playerInstance.playerInstanceData;
+                cs.playerInput = p;
+                cs.transform.parent = p.transform;
+                cs.SpawnPosition = spawnPositions[p.playerIndex];
+                
+                cs.CData = gameData.characterDB.GetCharByID(players[p.playerIndex].playerInstanceData.CurrentCharacterID);
                 Debug.Log(p + " has been iterated on");
 
-                p.GetComponent<TopDownController>().enabled = true;
-                p.GetComponent<CharacterController>().enabled = true;
+                playerGameObject.GetComponent<TopDownController>().enabled = true;
+                playerGameObject.GetComponent<CharacterController>().enabled = true;
                 cs.enabled = true;
-                
+
+                Destroy(playerGameObject.GetComponentInParent<Canvas>());
+
             }
         }
 
@@ -194,8 +202,8 @@ namespace Core
             playerInstance.name = pData.PlayerLabel;
             playerInstance.playerInstanceData = pData;
             playerInstance.transform.parent = this.transform;
-            var cs = playerInstance.GetComponent<CharacterSetup>();
-            cs.PData = pData;
+//            var cs = playerInstance.GetComponent<CharacterSetup>();
+//            cs.PData = pData;
         }
         
         private void SetCharData(int charid, int playerid)
@@ -210,8 +218,8 @@ namespace Core
         {
             foreach (var playerInstance in Players)
             {
-                playerInstance.GetComponent<TopDownController>().enabled = false;
-                playerInstance.GetComponent<CharacterController>().enabled = false;
+                playerInstance.GetComponentInChildren<TopDownController>().enabled = false;
+                playerInstance.GetComponentInChildren<CharacterController>().enabled = false;
             }
         }
     }

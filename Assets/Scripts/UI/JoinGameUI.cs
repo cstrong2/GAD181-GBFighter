@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Core;
 using Events;
 using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI
@@ -76,7 +75,8 @@ namespace UI
             }
             else if (playerUIStates.Where(p => p.State == Toggle.Active).All(rp => rp.playerReady))
             {
-                readyButton.interactable = true;
+                GameEvents.OnAllPlayersHaveSelectedCharactersEvent?.Invoke();
+//                readyButton.interactable = true;
             }
         }
 

@@ -38,7 +38,7 @@ namespace UI
             #region CursorSetup
                 cursor = Instantiate(cursor, canvas.transform);
                 cursor.SetActive(true);
-                cursor.name = "Cursor";
+                cursor.name = "Cursor " + playerInput.playerIndex;
                 cursorTransform = cursor.GetComponent<RectTransform>();
             #endregion
             
