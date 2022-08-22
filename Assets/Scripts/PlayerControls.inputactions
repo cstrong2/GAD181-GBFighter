@@ -198,7 +198,7 @@
                 {
                     "name": "",
                     "id": "36ac5f4e-cf11-418c-b74e-381fbbe93ca4",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;PS4 Controller;Xbox Controller",
@@ -242,7 +242,7 @@
                 {
                     "name": "",
                     "id": "787929d8-5733-4b59-b599-aae54f1aca51",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
